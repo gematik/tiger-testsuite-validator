@@ -1,0 +1,123 @@
+{
+  "name": "Test find last request with parameters",
+  "id": "http/https-gluecode-test-feature;test-find-last-request-with-parameters",
+  "scenarioId": "tiger-test-lib/HttpGlueCodeTest:Test find last request with parameters",
+  "methodName": "Test find last request with parameters",
+  "testSteps": [
+    {
+      "number": 1,
+      "description": "Given TGR clear recorded messages",
+      "duration": 2,
+      "startTime": "2024-04-25T17:07:01.328269689+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 2,
+      "description": "Given TGR send empty GET request to \"http://httpbin/anything?foobar\u003d1\"",
+      "duration": 109,
+      "startTime": "2024-04-25T17:07:01.330780076+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "cURL",
+          "contents": "curl -v -H \"key: value\" -H \"Accept: */*\" -H \"Content-Type: application/json\" -X GET \"http://httpbin/anything?foobar\u003d1\" ",
+          "isEvidence": false,
+          "id": "report-data-36a0104e-cf7c-4521-b75f-d924c2593328"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 3,
+      "description": "Then TGR send empty GET request to \"http://httpbin/anything?foobar\u003d1\u0026xyz\u003d4\"",
+      "duration": 101,
+      "startTime": "2024-04-25T17:07:01.440467532+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "cURL",
+          "contents": "curl -v -H \"key: value\" -H \"Accept: */*\" -H \"Content-Type: application/json\" -X GET \"http://httpbin/anything?foobar\u003d1\u0026xyz\u003d4\" ",
+          "isEvidence": false,
+          "id": "report-data-bef13974-5fb7-4ddc-ba98-d8ec252d0e2d"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 4,
+      "description": "Then TGR send empty GET request to \"http://httpbin/anything?foobar\u003d2\"",
+      "duration": 93,
+      "startTime": "2024-04-25T17:07:01.542856771+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "cURL",
+          "contents": "curl -v -H \"key: value\" -H \"Accept: */*\" -H \"Content-Type: application/json\" -X GET \"http://httpbin/anything?foobar\u003d2\" ",
+          "isEvidence": false,
+          "id": "report-data-9522e267-b9c3-4d37-9493-e4b34abcbf34"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 5,
+      "description": "Then TGR find last request to path \"/anything\" with \"$.path.foobar.value\" matching \"1\"",
+      "duration": 504,
+      "startTime": "2024-04-25T17:07:01.636593630+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 6,
+      "description": "Then TGR current response with attribute \"$.body.url.content.xyz.value\" matches \"4\"",
+      "duration": 0,
+      "startTime": "2024-04-25T17:07:02.141165137+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "RBellog 0",
+          "path": "downloadable/downloadable-c22207e2-b269-4c5b-be92-9f819db70b2f-rbel_Test_find_last_request_with_parameters_2024-04-25_17-07-02.html",
+          "isEvidence": true,
+          "id": "report-data-d5955dda-237c-473b-b183-6872389452fc"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    }
+  ],
+  "userStory": {
+    "id": "tiger-test-lib/HttpGlueCodeTest",
+    "storyName": "HTTP/HTTPS GlueCode Test feature",
+    "displayName": "HTTP/HTTPS GlueCode Test feature",
+    "path": "tiger-test-lib/HttpGlueCodeTest",
+    "pathElements": [
+      {
+        "name": "tiger-test-lib",
+        "description": ""
+      },
+      {
+        "name": "HttpGlueCodeTest",
+        "description": ""
+      }
+    ],
+    "type": "feature"
+  },
+  "title": "Test find last request with parameters",
+  "description": "",
+  "backgroundTitle": "",
+  "backgroundDescription": "",
+  "startTime": "2024-04-25T17:07:01.323901906+02:00[Europe/Vienna]",
+  "duration": 6,
+  "projectKey": "",
+  "isManualTestingUpToDate": false,
+  "manual": false,
+  "testSource": "Cucumber",
+  "order": 0,
+  "result": "SUCCESS"
+}

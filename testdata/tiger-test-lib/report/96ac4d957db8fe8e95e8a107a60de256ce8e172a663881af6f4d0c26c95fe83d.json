@@ -1,0 +1,240 @@
+{
+  "name": "Test \u003ccolor\u003e with \u003cinhalt\u003e",
+  "id": "http/https-gluecode-test-feature;test-\u003ccolor\u003e-with-\u003cinhalt\u003e",
+  "scenarioId": "tiger-test-lib/HttpGlueCodeTest:Test \u003ccolor\u003e with \u003cinhalt\u003e",
+  "methodName": "Test \u003ccolor\u003e with \u003cinhalt\u003e",
+  "testSteps": [
+    {
+      "number": 1,
+      "description": "1: Test red with Dagmar ({color\u003dred, inhalt\u003dDagmar})",
+      "duration": 231,
+      "startTime": "2024-04-25T17:06:47.179739654+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0,
+      "lineNumber": 10,
+      "children": [
+        {
+          "number": 2,
+          "description": "Given TGR clear recorded messages",
+          "duration": 9,
+          "startTime": "2024-04-25T17:06:47.285151857+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 3,
+          "description": "And TGR show red text \"${my.string}\"",
+          "duration": 31,
+          "startTime": "2024-04-25T17:06:47.297299631+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "reportData": [
+            {
+              "title": "RBellog 1",
+              "path": "downloadable/downloadable-fe78dea8-f987-43c4-a889-a8c8f3c551b0-rbel_Test_red_with_Dagmar_1_2024-04-25_17-06-47.html",
+              "isEvidence": true,
+              "id": "report-data-21d6f1ad-fee3-4bce-b067-2aef2b5ea258"
+            }
+          ],
+          "precondition": false,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "description": "2: Test blue with Nils ({color\u003dblue, inhalt\u003dNils})",
+      "duration": 53,
+      "startTime": "2024-04-25T17:06:47.451633883+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0,
+      "lineNumber": 11,
+      "children": [
+        {
+          "number": 5,
+          "description": "Given TGR clear recorded messages",
+          "duration": 5,
+          "startTime": "2024-04-25T17:06:47.466958472+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 6,
+          "description": "And TGR show blue text \"${my.string}\"",
+          "duration": 16,
+          "startTime": "2024-04-25T17:06:47.474219992+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "reportData": [
+            {
+              "title": "RBellog 2",
+              "path": "downloadable/downloadable-1893569d-ed62-4ccd-ae8c-5e9430311bca-rbel_Test_blue_with_Nils_2_2024-04-25_17-06-47.html",
+              "isEvidence": true,
+              "id": "report-data-11afd7c9-521a-4165-b5de-3fe74f16a2d8"
+            }
+          ],
+          "precondition": false,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "description": "3: Test green with Tim ({color\u003dgreen, inhalt\u003dTim})",
+      "duration": 48,
+      "startTime": "2024-04-25T17:06:47.542401816+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0,
+      "lineNumber": 12,
+      "children": [
+        {
+          "number": 8,
+          "description": "Given TGR clear recorded messages",
+          "duration": 15,
+          "startTime": "2024-04-25T17:06:47.552611547+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 9,
+          "description": "And TGR show green text \"${my.string}\"",
+          "duration": 11,
+          "startTime": "2024-04-25T17:06:47.569911446+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "reportData": [
+            {
+              "title": "RBellog 3",
+              "path": "downloadable/downloadable-fdabc8c9-66c6-4310-9aed-f556a81c52bd-rbel_Test_green_with_Tim_3_2024-04-25_17-06-47.html",
+              "isEvidence": true,
+              "id": "report-data-38b2b6c6-96da-4429-9287-cd2e5c8cd502"
+            }
+          ],
+          "precondition": false,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "description": "4: Test yellow with Sophie ({color\u003dyellow, inhalt\u003dSophie})",
+      "duration": 35,
+      "startTime": "2024-04-25T17:06:47.618982246+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0,
+      "lineNumber": 13,
+      "children": [
+        {
+          "number": 11,
+          "description": "Given TGR clear recorded messages",
+          "duration": 4,
+          "startTime": "2024-04-25T17:06:47.627840556+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 12,
+          "description": "And TGR show yellow text \"${my.string}\"",
+          "duration": 12,
+          "startTime": "2024-04-25T17:06:47.634101887+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "reportData": [
+            {
+              "title": "RBellog 4",
+              "path": "downloadable/downloadable-bf26068d-6ae5-4a5e-853f-a61f77b0597a-rbel_Test_yellow_with_Sophie_4_2024-04-25_17-06-47.html",
+              "isEvidence": true,
+              "id": "report-data-79b89d48-8113-4010-961d-a3d31d1770e8"
+            }
+          ],
+          "precondition": false,
+          "level": 1
+        }
+      ]
+    }
+  ],
+  "userStory": {
+    "id": "tiger-test-lib/HttpGlueCodeTest",
+    "storyName": "HTTP/HTTPS GlueCode Test feature",
+    "displayName": "HTTP/HTTPS GlueCode Test feature",
+    "path": "tiger-test-lib/HttpGlueCodeTest",
+    "pathElements": [
+      {
+        "name": "tiger-test-lib",
+        "description": ""
+      },
+      {
+        "name": "HttpGlueCodeTest",
+        "description": ""
+      }
+    ],
+    "type": "feature"
+  },
+  "title": "Test \u003ccolor\u003e with \u003cinhalt\u003e",
+  "description": "",
+  "backgroundTitle": "",
+  "backgroundDescription": "",
+  "startTime": "2024-04-25T17:06:47.166083097+02:00[Europe/Vienna]",
+  "duration": 128,
+  "projectKey": "",
+  "isManualTestingUpToDate": false,
+  "dataTable": {
+    "headers": [
+      "color",
+      "inhalt"
+    ],
+    "rows": [
+      {
+        "values": [
+          "red",
+          "Dagmar"
+        ],
+        "lineNumber": 10,
+        "result": "SUCCESS"
+      },
+      {
+        "values": [
+          "blue",
+          "Nils"
+        ],
+        "lineNumber": 11,
+        "result": "SUCCESS"
+      },
+      {
+        "values": [
+          "green",
+          "Tim"
+        ],
+        "lineNumber": 12,
+        "result": "SUCCESS"
+      },
+      {
+        "values": [
+          "yellow",
+          "Sophie"
+        ],
+        "lineNumber": 13,
+        "result": "SUCCESS"
+      }
+    ],
+    "predefinedRows": true,
+    "scenarioOutline": "And TGR show \u003ccolor\u003e text \"${my.string}\"\n\r",
+    "dataSetDescriptors": [
+      {
+        "startRow": 0,
+        "rowCount": 0,
+        "name": "We use this data only for testing data variant display in workflow ui, there is no deeper sense in it",
+        "description": ""
+      }
+    ]
+  },
+  "manual": false,
+  "testSource": "Cucumber",
+  "order": 0,
+  "result": "SUCCESS",
+  "scenarioOutline": "And TGR show \u003ccolor\u003e text \"${my.string}\""
+}

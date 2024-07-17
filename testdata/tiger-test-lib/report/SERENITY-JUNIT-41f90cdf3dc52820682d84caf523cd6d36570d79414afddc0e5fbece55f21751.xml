@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Provide a test to check if parsing of tgr file works" skipped="0" tests="2" time="2.46" timestamp="2024-04-25 05:07:03"><testcase name="Parse Tgr file check response 1"/><testcase name="Parse Tgr file check response 2"/></testsuite>

@@ -1,0 +1,201 @@
+{
+  "name": "Test find last request",
+  "id": "http/https-gluecode-test-feature;test-find-last-request",
+  "scenarioId": "tiger-test-lib/HttpGlueCodeTest:Test find last request",
+  "methodName": "Test find last request",
+  "testSteps": [
+    {
+      "number": 1,
+      "description": "Given TGR clear recorded messages",
+      "duration": 2,
+      "startTime": "2024-04-25T17:07:02.166337667+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 2,
+      "description": "Given TGR send empty GET request to \"http://httpbin/anything?foobar\u003d1\"",
+      "duration": 97,
+      "startTime": "2024-04-25T17:07:02.169527999+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "cURL",
+          "contents": "curl -v -H \"key: value\" -H \"Accept: */*\" -H \"Content-Type: application/json\" -X GET \"http://httpbin/anything?foobar\u003d1\" ",
+          "isEvidence": false,
+          "id": "report-data-9e84881a-d733-4002-9827-e02c9e77491f"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 3,
+      "description": "Then TGR send empty GET request to \"http://httpbin/anything?foobar\u003d2\"",
+      "duration": 125,
+      "startTime": "2024-04-25T17:07:02.267660514+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "cURL",
+          "contents": "curl -v -H \"key: value\" -H \"Accept: */*\" -H \"Content-Type: application/json\" -X GET \"http://httpbin/anything?foobar\u003d2\" ",
+          "isEvidence": false,
+          "id": "report-data-75c60c91-7756-4102-9fcf-ea4aa11c53de"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 4,
+      "description": "Then TGR send empty GET request to \"http://httpbin/anything?foobar\u003d3\"",
+      "duration": 84,
+      "startTime": "2024-04-25T17:07:02.393855772+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "cURL",
+          "contents": "curl -v -H \"key: value\" -H \"Accept: */*\" -H \"Content-Type: application/json\" -X GET \"http://httpbin/anything?foobar\u003d3\" ",
+          "isEvidence": false,
+          "id": "report-data-ed6074ac-5e7f-45d7-9bae-612d03eb2202"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 5,
+      "description": "Then TGR send empty GET request to \"http://httpbin/status/404?other\u003dparam\"",
+      "duration": 95,
+      "startTime": "2024-04-25T17:07:02.478861292+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "cURL",
+          "contents": "curl -v -H \"key: value\" -H \"Accept: */*\" -H \"Content-Type: application/json\" -X GET \"http://httpbin/status/404?other\u003dparam\" ",
+          "isEvidence": false,
+          "id": "report-data-06c8586c-b4a0-44a0-95b9-bc4292335362"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 6,
+      "description": "Then TGR find the last request",
+      "duration": 3,
+      "startTime": "2024-04-25T17:07:02.575381510+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 7,
+      "description": "Then TGR current response with attribute \"$.responseCode\" matches \"404\"",
+      "duration": 15,
+      "startTime": "2024-04-25T17:07:02.579701500+02:00[Europe/Vienna]",
+      "exception": {
+        "errorType": "java.lang.AssertionError",
+        "message": "[Rbelpath \u0027$.responseCode\u0027 matches] \nExpecting actual:\n  \"200\"\nto match pattern:\n  \"404\"",
+        "stackTrace": [
+          {
+            "declaringClass": "de.gematik.test.tiger.lib.rbel.RbelMessageValidator",
+            "methodName": "assertAttributeOfCurrentResponseMatches",
+            "fileName": "RbelMessageValidator.java",
+            "lineNumber": 386
+          },
+          {
+            "declaringClass": "de.gematik.test.tiger.glue.RBelValidatorGlue",
+            "methodName": "currentResponseMessageAttributeMatches",
+            "fileName": "RBelValidatorGlue.java",
+            "lineNumber": 415
+          },
+          {
+            "declaringClass": "✽",
+            "methodName": "TGR current response with attribute \"$.responseCode\" matches \"404\"",
+            "fileName": "file:///home/thomas/IdeaProjects/tiger/tiger-test-lib/src/test/resources/features/tiger-test-lib/HttpGlueCodeTest.feature",
+            "lineNumber": 158
+          }
+        ]
+      },
+      "result": "FAILURE",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 8,
+      "description": "Then TGR assert \"!{rbel:currentRequestAsString(\u0027$.path.other.value\u0027)}\" matches \"param\"",
+      "duration": 0,
+      "startTime": "2024-04-25T17:07:02.596207798+02:00[Europe/Vienna]",
+      "result": "SKIPPED",
+      "reportData": [
+        {
+          "title": "RBellog 0",
+          "path": "downloadable/downloadable-2476e6a0-e543-4cbf-aa5e-07bd6dd71a98-rbel_Test_find_last_request_2024-04-25_17-07-02.html",
+          "isEvidence": true,
+          "id": "report-data-8279c8a8-b201-42d8-80c4-3489afbabdfe"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    }
+  ],
+  "userStory": {
+    "id": "tiger-test-lib/HttpGlueCodeTest",
+    "storyName": "HTTP/HTTPS GlueCode Test feature",
+    "displayName": "HTTP/HTTPS GlueCode Test feature",
+    "path": "tiger-test-lib/HttpGlueCodeTest",
+    "pathElements": [
+      {
+        "name": "tiger-test-lib",
+        "description": ""
+      },
+      {
+        "name": "HttpGlueCodeTest",
+        "description": ""
+      }
+    ],
+    "type": "feature"
+  },
+  "title": "Test find last request",
+  "description": "",
+  "backgroundTitle": "",
+  "backgroundDescription": "",
+  "startTime": "2024-04-25T17:07:02.162070335+02:00[Europe/Vienna]",
+  "duration": 6,
+  "testFailureCause": {
+    "errorType": "java.lang.AssertionError",
+    "message": "[Rbelpath \u0027$.responseCode\u0027 matches] \nExpecting actual:\n  \"200\"\nto match pattern:\n  \"404\"",
+    "stackTrace": [
+      {
+        "declaringClass": "de.gematik.test.tiger.lib.rbel.RbelMessageValidator",
+        "methodName": "assertAttributeOfCurrentResponseMatches",
+        "fileName": "RbelMessageValidator.java",
+        "lineNumber": 386
+      },
+      {
+        "declaringClass": "de.gematik.test.tiger.glue.RBelValidatorGlue",
+        "methodName": "currentResponseMessageAttributeMatches",
+        "fileName": "RBelValidatorGlue.java",
+        "lineNumber": 415
+      },
+      {
+        "declaringClass": "✽",
+        "methodName": "TGR current response with attribute \"$.responseCode\" matches \"404\"",
+        "fileName": "file:///home/thomas/IdeaProjects/tiger/tiger-test-lib/src/test/resources/features/tiger-test-lib/HttpGlueCodeTest.feature",
+        "lineNumber": 158
+      }
+    ]
+  },
+  "testFailureClassname": "java.lang.AssertionError",
+  "testFailureMessage": "[Rbelpath \u0027$.responseCode\u0027 matches] \nExpecting actual:\n  \"200\"\nto match pattern:\n  \"404\"",
+  "testFailureSummary": "FAILURE;java.lang.AssertionError;[Rbelpath \u0027$.responseCode\u0027 matches] \nExpecting actual:\n  \"200\"\nto match pattern:\n  \"404\";RbelMessageValidator.java",
+  "projectKey": "",
+  "annotatedResult": "FAILURE",
+  "isManualTestingUpToDate": false,
+  "manual": false,
+  "testSource": "Cucumber",
+  "order": 0,
+  "result": "FAILURE"
+}

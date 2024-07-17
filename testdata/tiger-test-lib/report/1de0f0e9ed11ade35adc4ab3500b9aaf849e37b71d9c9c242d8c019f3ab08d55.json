@@ -1,0 +1,70 @@
+{
+  "name": "Test that the change of the local variable does not persist to this test",
+  "id": "tigerglue-test-feature---second-file;test-that-the-change-of-the-local-variable-does-not-persist-to-this-test",
+  "scenarioId": "tiger-test-lib/TigerGlueTest_secondFile:Test that the change of the local variable does not persist to this test",
+  "methodName": "Test that the change of the local variable does not persist to this test",
+  "testSteps": [
+    {
+      "number": 1,
+      "description": "Then TGR assert variable \"tiger.tigerGlue.helloTestLocal\" matches \"global value for helloTestLocal\"",
+      "duration": 3,
+      "startTime": "2024-04-25T17:07:03.500847+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 2,
+      "description": "Then TGR assert variable \"tiger.tigerGlue.helloTestFeature1\" matches \"global value for helloTestFeature1\"",
+      "duration": 2,
+      "startTime": "2024-04-25T17:07:03.505065476+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 3,
+      "description": "Then TGR assert variable \"tiger.tigerGlue.helloTestFeature2\" matches \"local value feature 2nd file\"",
+      "duration": 1,
+      "startTime": "2024-04-25T17:07:03.508173849+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "RBellog 0",
+          "path": "downloadable/downloadable-04e07c86-07d2-4a6c-bdf6-ecaa94073825-rbel_Test_that_the_change_of_the_local_variable_does_not_persist_to_this_test_2024-04-25_17-07-03.html",
+          "isEvidence": true,
+          "id": "report-data-b754c309-155d-478f-a3b2-3691d2739c4f"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    }
+  ],
+  "userStory": {
+    "id": "tiger-test-lib/TigerGlueTest_secondFile",
+    "storyName": "TigerGlue Test feature - Second File",
+    "displayName": "TigerGlue Test feature - Second File",
+    "path": "tiger-test-lib/TigerGlueTest_secondFile",
+    "pathElements": [
+      {
+        "name": "tiger-test-lib",
+        "description": ""
+      },
+      {
+        "name": "TigerGlueTest_secondFile",
+        "description": ""
+      }
+    ],
+    "type": "feature"
+  },
+  "title": "Test that the change of the local variable does not persist to this test",
+  "description": "",
+  "startTime": "2024-04-25T17:07:03.492829990+02:00[Europe/Vienna]",
+  "duration": 11,
+  "projectKey": "",
+  "isManualTestingUpToDate": false,
+  "manual": false,
+  "testSource": "Cucumber",
+  "order": 0,
+  "result": "SUCCESS"
+}

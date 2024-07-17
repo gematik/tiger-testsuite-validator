@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="1" failures="1" name="HTTP/HTTPS GlueCode Test feature" skipped="0" tests="26" time="0.3" timestamp="2024-04-25 05:06:47"><testcase name="Test &lt;color&gt; with &lt;inhalt&gt;"/><testcase name="Test &lt;color&gt; with &lt;text&gt; again"/><testcase name="Simple Get Request"/><testcase name="Get Request to folder"/><testcase name="PUT Request to folder"/><testcase name="PUT Request with body to folder"/><testcase name="PUT Request with body from file to folder"/><testcase name="DELETE Request without body"/><testcase name="Request with custom header"/><testcase name="Request with default header"/><testcase name="Request with custom and default header, check headers"/><testcase name="Get Request with custom and default header, check body, application type url encoded"/><testcase name="Post Request with custom and default header, check body, application type url encoded"/><testcase name="Request with custom and default header, check application type json"/><testcase name="JEXL Rbel Namespace Test"/><testcase name="Simple first test"/><testcase name="Test Find Last Request"/><testcase name="Test find last request with parameters"/><testcase name="Test find last request"><failure message="[Rbelpath '$.responseCode' matches] &#10;Expecting actual:&#10;  &quot;200&quot;&#10;to match pattern:&#10;  &quot;404&quot;" type="java.lang.AssertionError">[Rbelpath '$.responseCode' matches] 
+Expecting actual:
+  "200"
+to match pattern:
+  "404"</failure><system-err>[Rbelpath '$.responseCode' matches] 
+Expecting actual:
+  "200"
+to match pattern:
+  "404"
+de.gematik.test.tiger.lib.rbel.RbelMessageValidator.assertAttributeOfCurrentResponseMatches(RbelMessageValidator.java:386)
+de.gematik.test.tiger.glue.RBelValidatorGlue.currentResponseMessageAttributeMatches(RBelValidatorGlue.java:415)
+✽.TGR current response with attribute "$.responseCode" matches "404"(file:///home/thomas/IdeaProjects/tiger/tiger-test-lib/src/test/resources/features/tiger-test-lib/HttpGlueCodeTest.feature:158)
+</system-err></testcase><testcase name="Get Request to folder and test param is url decoded when access via $.path and ..value is url decoded"/><testcase name="Test deactivate followRedirects"><error message="No Request found." type="de.gematik.test.tiger.lib.TigerLibraryException">No Request found.</error><system-err>No Request found.
+de.gematik.test.tiger.lib.rbel.RbelMessageValidator.lambda$findLastRequest$20(RbelMessageValidator.java:555)
+de.gematik.test.tiger.lib.rbel.RbelMessageValidator.findLastRequest(RbelMessageValidator.java:555)
+de.gematik.test.tiger.glue.RBelValidatorGlue.findLastRequest(RBelValidatorGlue.java:291)
+✽.TGR find the last request(file:///home/thomas/IdeaProjects/tiger/tiger-test-lib/src/test/resources/features/tiger-test-lib/HttpGlueCodeTest.feature:170)
+</system-err></testcase></testsuite>
