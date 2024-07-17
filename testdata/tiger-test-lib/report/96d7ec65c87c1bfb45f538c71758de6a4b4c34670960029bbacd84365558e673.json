@@ -1,0 +1,134 @@
+{
+  "name": "Post Request with custom and default header, check body, application type url encoded",
+  "id": "http/https-gluecode-test-feature;post-request-with-custom-and-default-header--check-body--application-type-url-encoded",
+  "scenarioId": "tiger-test-lib/HttpGlueCodeTest:Post Request with custom and default header, check body, application type url encoded",
+  "methodName": "Post Request with custom and default header, check body, application type url encoded",
+  "testSteps": [
+    {
+      "number": 1,
+      "description": "Given TGR clear recorded messages",
+      "duration": 1,
+      "startTime": "2024-04-25T17:06:57.270505793+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 2,
+      "description": "Given TGR set local variable \"configured_state_value\" to \"some weird $value§\"",
+      "duration": 2,
+      "startTime": "2024-04-25T17:06:57.272865218+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 3,
+      "description": "Given TGR set local variable \"configured_param_name\" to \"my_cool_param\"",
+      "duration": 1,
+      "startTime": "2024-04-25T17:06:57.276088896+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 4,
+      "description": "When TGR send POST request to \"http://httpbin/post\" with:\n| ${configured_param_name} | state | redirect_uri |\n| client_id | ${configured_state_value} | https://my.redirect |",
+      "duration": 145,
+      "startTime": "2024-04-25T17:06:57.277697590+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "cURL",
+          "contents": "curl -v -H \"key: value\" -H \"Accept: */*\" -H \"Content-Type: application/x-www-form-urlencoded; charset\u003dISO-8859-1 --data \"my_cool_param\u003dclient_id\u0026state\u003dsome+weird+%24value%C2%A7\u0026redirect_uri\u003dhttps%3A%2F%2Fmy.redirect\" \" -X POST \"http://httpbin/post\" ",
+          "isEvidence": false,
+          "id": "report-data-9a7d7b42-c2be-4aa3-8a1b-2331339145fe"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 5,
+      "description": "Then TGR find last request to path \".*\"",
+      "duration": 503,
+      "startTime": "2024-04-25T17:06:57.423326794+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 6,
+      "description": "And TGR assert \"!{rbel:currentRequestAsString(\u0027$.body.state\u0027)}\" matches \"!{urlEncoded(\u0027some weird $value§\u0027)}\"",
+      "duration": 3,
+      "startTime": "2024-04-25T17:06:57.926908242+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 7,
+      "description": "And TGR assert \"!{rbel:currentRequestAsString(\u0027$.body.my_cool_param\u0027)}\" matches \"client_id\"",
+      "duration": 2,
+      "startTime": "2024-04-25T17:06:57.930593175+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 8,
+      "description": "And TGR assert \"!{rbel:currentRequestAsString(\u0027$.header.Content-Type\u0027)}\" matches \"application/x-www-form-urlencoded.*\"",
+      "duration": 2,
+      "startTime": "2024-04-25T17:06:57.932911842+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 9,
+      "description": "And TGR assert \"!{rbel:currentRequestAsString(\u0027$.body.redirect_uri\u0027)}\" matches \"!{urlEncoded(\u0027https://my.redirect\u0027)}\"",
+      "duration": 2,
+      "startTime": "2024-04-25T17:06:57.935435798+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "RBellog 0",
+          "path": "downloadable/downloadable-40acc9e8-12c3-475c-a15e-3444000e67e9-rbel_Post_Request_with_custom_and_default_header,_check_body,_app8e7dc89a-3954-3718-971e-db549901fcdc_2024-04-25_17-06-57.html",
+          "isEvidence": true,
+          "id": "report-data-4dfac7ee-b5ad-4d42-9532-01b48c2fe5c9"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    }
+  ],
+  "userStory": {
+    "id": "tiger-test-lib/HttpGlueCodeTest",
+    "storyName": "HTTP/HTTPS GlueCode Test feature",
+    "displayName": "HTTP/HTTPS GlueCode Test feature",
+    "path": "tiger-test-lib/HttpGlueCodeTest",
+    "pathElements": [
+      {
+        "name": "tiger-test-lib",
+        "description": ""
+      },
+      {
+        "name": "HttpGlueCodeTest",
+        "description": ""
+      }
+    ],
+    "type": "feature"
+  },
+  "title": "Post Request with custom and default header, check body, application type url encoded",
+  "description": "",
+  "backgroundTitle": "",
+  "backgroundDescription": "",
+  "startTime": "2024-04-25T17:06:57.265712913+02:00[Europe/Vienna]",
+  "duration": 6,
+  "projectKey": "",
+  "isManualTestingUpToDate": false,
+  "manual": false,
+  "testSource": "Cucumber",
+  "order": 0,
+  "result": "SUCCESS"
+}

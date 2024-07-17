@@ -1,0 +1,98 @@
+{
+  "name": "PUT Request to folder",
+  "id": "http/https-gluecode-test-feature;put-request-to-folder",
+  "scenarioId": "tiger-test-lib/HttpGlueCodeTest:PUT Request to folder",
+  "methodName": "PUT Request to folder",
+  "testSteps": [
+    {
+      "number": 1,
+      "description": "Given TGR clear recorded messages",
+      "duration": 2,
+      "startTime": "2024-04-25T17:06:50.456073789+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 2,
+      "description": "When TGR send empty PUT request to \"http://httpbin/put\"",
+      "duration": 140,
+      "startTime": "2024-04-25T17:06:50.458917008+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "cURL",
+          "contents": "curl -v -H \"Accept: */*\" -X PUT -d \u0027\u0027 \"http://httpbin/put\" ",
+          "isEvidence": false,
+          "id": "report-data-f60bbcfa-e3d1-4757-819d-63c03f5ce1a9"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 3,
+      "description": "Then TGR find last request to path \".*\"",
+      "duration": 503,
+      "startTime": "2024-04-25T17:06:50.599798658+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 4,
+      "description": "And TGR assert \"!{rbel:currentRequestAsString(\u0027$.method\u0027)}\" matches \"PUT\"",
+      "duration": 3,
+      "startTime": "2024-04-25T17:06:51.104116656+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 5,
+      "description": "And TGR assert \"!{rbel:currentRequestAsString(\u0027$.path\u0027)}\" matches \"\\/put\\/?\"",
+      "duration": 1,
+      "startTime": "2024-04-25T17:06:51.107604923+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "RBellog 0",
+          "path": "downloadable/downloadable-93951a53-f82b-44ba-b142-e5f6eadb2e1d-rbel_PUT_Request_to_folder_2024-04-25_17-06-51.html",
+          "isEvidence": true,
+          "id": "report-data-858f2090-e7df-4789-93d9-4ee1dd20fd59"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    }
+  ],
+  "userStory": {
+    "id": "tiger-test-lib/HttpGlueCodeTest",
+    "storyName": "HTTP/HTTPS GlueCode Test feature",
+    "displayName": "HTTP/HTTPS GlueCode Test feature",
+    "path": "tiger-test-lib/HttpGlueCodeTest",
+    "pathElements": [
+      {
+        "name": "tiger-test-lib",
+        "description": ""
+      },
+      {
+        "name": "HttpGlueCodeTest",
+        "description": ""
+      }
+    ],
+    "type": "feature"
+  },
+  "title": "PUT Request to folder",
+  "description": "",
+  "backgroundTitle": "",
+  "backgroundDescription": "",
+  "startTime": "2024-04-25T17:06:50.451191444+02:00[Europe/Vienna]",
+  "duration": 7,
+  "projectKey": "",
+  "isManualTestingUpToDate": false,
+  "manual": false,
+  "testSource": "Cucumber",
+  "order": 0,
+  "result": "SUCCESS"
+}

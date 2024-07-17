@@ -1,0 +1,98 @@
+{
+  "name": "DELETE Request without body",
+  "id": "http/https-gluecode-test-feature;delete-request-without-body",
+  "scenarioId": "tiger-test-lib/HttpGlueCodeTest:DELETE Request without body",
+  "methodName": "DELETE Request without body",
+  "testSteps": [
+    {
+      "number": 1,
+      "description": "Given TGR clear recorded messages",
+      "duration": 3,
+      "startTime": "2024-04-25T17:06:52.937331472+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 2,
+      "description": "When TGR send empty DELETE request to \"http://httpbin/delete\"",
+      "duration": 121,
+      "startTime": "2024-04-25T17:06:52.941309342+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "cURL",
+          "contents": "curl -v -H \"Accept: */*\" -X DELETE \"http://httpbin/delete\" ",
+          "isEvidence": false,
+          "id": "report-data-dac6e75c-1823-4c7d-81ff-e57eda841bd5"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 3,
+      "description": "Then TGR find last request to path \".*\"",
+      "duration": 904,
+      "startTime": "2024-04-25T17:06:53.063921105+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 4,
+      "description": "And TGR assert \"!{rbel:currentRequestAsString(\u0027$.method\u0027)}\" matches \"DELETE\"",
+      "duration": 3,
+      "startTime": "2024-04-25T17:06:53.969055939+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 5,
+      "description": "And TGR assert \"!{rbel:currentRequestAsString(\u0027$.path\u0027)}\" matches \"\\/delete\\/?\"",
+      "duration": 1,
+      "startTime": "2024-04-25T17:06:53.972393523+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "RBellog 0",
+          "path": "downloadable/downloadable-001a7973-f5c8-4f3d-960e-01f1c5bcf17c-rbel_DELETE_Request_without_body_2024-04-25_17-06-53.html",
+          "isEvidence": true,
+          "id": "report-data-80ee9771-f97f-4275-8e70-f72fe062964e"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    }
+  ],
+  "userStory": {
+    "id": "tiger-test-lib/HttpGlueCodeTest",
+    "storyName": "HTTP/HTTPS GlueCode Test feature",
+    "displayName": "HTTP/HTTPS GlueCode Test feature",
+    "path": "tiger-test-lib/HttpGlueCodeTest",
+    "pathElements": [
+      {
+        "name": "tiger-test-lib",
+        "description": ""
+      },
+      {
+        "name": "HttpGlueCodeTest",
+        "description": ""
+      }
+    ],
+    "type": "feature"
+  },
+  "title": "DELETE Request without body",
+  "description": "",
+  "backgroundTitle": "",
+  "backgroundDescription": "",
+  "startTime": "2024-04-25T17:06:52.927955719+02:00[Europe/Vienna]",
+  "duration": 12,
+  "projectKey": "",
+  "isManualTestingUpToDate": false,
+  "manual": false,
+  "testSource": "Cucumber",
+  "order": 0,
+  "result": "SUCCESS"
+}

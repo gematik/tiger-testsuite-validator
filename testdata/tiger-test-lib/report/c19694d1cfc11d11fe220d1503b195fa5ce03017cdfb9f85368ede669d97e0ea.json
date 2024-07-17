@@ -1,0 +1,434 @@
+{
+  "name": "Test \u003ccolor\u003e with \u003ctext\u003e",
+  "id": "provide-a-test-context-to-test-suites-to-maintain-data-between-steps;test-\u003ccolor\u003e-with-\u003ctext\u003e",
+  "scenarioId": "tiger-test-lib/testcontext:Test \u003ccolor\u003e with \u003ctext\u003e",
+  "methodName": "Test \u003ccolor\u003e with \u003ctext\u003e",
+  "testSteps": [
+    {
+      "number": 1,
+      "description": "1: Test green with aha ({color\u003dgreen, text\u003daha})",
+      "duration": 18,
+      "startTime": "2024-04-25T17:07:13.009210718+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0,
+      "lineNumber": 12,
+      "children": [
+        {
+          "number": 2,
+          "description": "Given TGR show green banner \"aha\"",
+          "duration": 2,
+          "startTime": "2024-04-25T17:07:13.016839046+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 3,
+          "description": "And TGR clear recorded messages",
+          "duration": 2,
+          "startTime": "2024-04-25T17:07:13.020349919+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 4,
+          "description": "Then TGR clear recorded messages",
+          "duration": 0,
+          "startTime": "2024-04-25T17:07:13.023039466+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "reportData": [
+            {
+              "title": "RBellog 1",
+              "path": "downloadable/downloadable-6a736258-dc7c-426b-bcf7-02bc5b728b07-rbel_Test_green_with_aha_1_2024-04-25_17-07-13.html",
+              "isEvidence": true,
+              "id": "report-data-32a6f2bc-2bae-4e1b-97f9-2f5c03fc4d13"
+            }
+          ],
+          "precondition": false,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "description": "2: Test red with bhb ({color\u003dred, text\u003dbhb})",
+      "duration": 19,
+      "startTime": "2024-04-25T17:07:13.038900295+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0,
+      "lineNumber": 14,
+      "children": [
+        {
+          "number": 6,
+          "description": "Given TGR show red banner \"bhb\"",
+          "duration": 2,
+          "startTime": "2024-04-25T17:07:13.046247876+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 7,
+          "description": "And TGR clear recorded messages",
+          "duration": 1,
+          "startTime": "2024-04-25T17:07:13.049320153+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 8,
+          "description": "Then TGR clear recorded messages",
+          "duration": 1,
+          "startTime": "2024-04-25T17:07:13.051787248+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "reportData": [
+            {
+              "title": "RBellog 2",
+              "path": "downloadable/downloadable-7ad2b709-c762-441c-9ab3-db5687d36860-rbel_Test_red_with_bhb_2_2024-04-25_17-07-13.html",
+              "isEvidence": true,
+              "id": "report-data-7b042d1e-9dcf-415b-90d1-333948758f7d"
+            }
+          ],
+          "precondition": false,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "description": "3: Test red with DONT USE ({color\u003dred, text\u003dDONT USE})",
+      "duration": 18,
+      "startTime": "2024-04-25T17:07:13.069345207+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0,
+      "lineNumber": 19,
+      "children": [
+        {
+          "number": 10,
+          "description": "Given TGR show red banner \"DONT USE\"",
+          "duration": 2,
+          "startTime": "2024-04-25T17:07:13.073605269+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 11,
+          "description": "And TGR clear recorded messages",
+          "duration": 3,
+          "startTime": "2024-04-25T17:07:13.077771570+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 12,
+          "description": "Then TGR clear recorded messages",
+          "duration": 1,
+          "startTime": "2024-04-25T17:07:13.082371544+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "reportData": [
+            {
+              "title": "RBellog 3",
+              "path": "downloadable/downloadable-71285cac-c76c-471e-923b-c5d2c5053ebb-rbel_Test_red_with_DONT_USE_3_2024-04-25_17-07-13.html",
+              "isEvidence": true,
+              "id": "report-data-2734d7c6-e609-4f52-b428-8bb327bd3263"
+            }
+          ],
+          "precondition": false,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "description": "4: Test green with can ({color\u003dgreen, text\u003dcan})",
+      "duration": 14,
+      "startTime": "2024-04-25T17:07:13.096466672+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0,
+      "lineNumber": 26,
+      "children": [
+        {
+          "number": 14,
+          "description": "Given TGR show green banner \"can\"",
+          "duration": 2,
+          "startTime": "2024-04-25T17:07:13.100835693+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 15,
+          "description": "And TGR clear recorded messages",
+          "duration": 2,
+          "startTime": "2024-04-25T17:07:13.104468316+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 16,
+          "description": "Then TGR clear recorded messages",
+          "duration": 0,
+          "startTime": "2024-04-25T17:07:13.107404589+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "reportData": [
+            {
+              "title": "RBellog 4",
+              "path": "downloadable/downloadable-abbf1f4b-6de8-417c-8ef7-af22af74d1dd-rbel_Test_green_with_can_4_2024-04-25_17-07-13.html",
+              "isEvidence": true,
+              "id": "report-data-6b34554d-2794-40db-a7c7-7867d33391ff"
+            }
+          ],
+          "precondition": false,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "description": "5: Test red with cbn ({color\u003dred, text\u003dcbn})",
+      "duration": 15,
+      "startTime": "2024-04-25T17:07:13.120512272+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0,
+      "lineNumber": 28,
+      "children": [
+        {
+          "number": 18,
+          "description": "Given TGR show red banner \"cbn\"",
+          "duration": 3,
+          "startTime": "2024-04-25T17:07:13.124398553+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 19,
+          "description": "And TGR clear recorded messages",
+          "duration": 2,
+          "startTime": "2024-04-25T17:07:13.129214104+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 20,
+          "description": "Then TGR clear recorded messages",
+          "duration": 0,
+          "startTime": "2024-04-25T17:07:13.132003212+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "reportData": [
+            {
+              "title": "RBellog 5",
+              "path": "downloadable/downloadable-8b9081bc-f291-4600-a2b9-a07826111c45-rbel_Test_red_with_cbn_5_2024-04-25_17-07-13.html",
+              "isEvidence": true,
+              "id": "report-data-b10be55e-15fc-434b-ba17-58ad7775a8ca"
+            }
+          ],
+          "precondition": false,
+          "level": 1
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "description": "6: Test black with ccn ({color\u003dblack, text\u003dccn})",
+      "duration": 16,
+      "startTime": "2024-04-25T17:07:13.144627780+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0,
+      "lineNumber": 29,
+      "children": [
+        {
+          "number": 22,
+          "description": "Given TGR show black banner \"ccn\"",
+          "duration": 2,
+          "startTime": "2024-04-25T17:07:13.150405994+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 23,
+          "description": "And TGR clear recorded messages",
+          "duration": 2,
+          "startTime": "2024-04-25T17:07:13.153395567+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "precondition": false,
+          "level": 1
+        },
+        {
+          "number": 24,
+          "description": "Then TGR clear recorded messages",
+          "duration": 0,
+          "startTime": "2024-04-25T17:07:13.156690352+02:00[Europe/Vienna]",
+          "result": "SUCCESS",
+          "reportData": [
+            {
+              "title": "RBellog 6",
+              "path": "downloadable/downloadable-defea317-faf4-4342-9704-675090b3d2ef-rbel_Test_black_with_ccn_6_2024-04-25_17-07-13.html",
+              "isEvidence": true,
+              "id": "report-data-a1e6ea3f-be21-40fc-b425-5d60ccff9d90"
+            }
+          ],
+          "precondition": false,
+          "level": 1
+        }
+      ]
+    }
+  ],
+  "userStory": {
+    "id": "tiger-test-lib/testcontext",
+    "storyName": "Provide a test context to test suites to maintain data between steps",
+    "displayName": "Provide a test context to test suites to maintain data between steps",
+    "path": "tiger-test-lib/testcontext",
+    "pathElements": [
+      {
+        "name": "tiger-test-lib",
+        "description": ""
+      },
+      {
+        "name": "testcontext",
+        "description": ""
+      }
+    ],
+    "type": "feature"
+  },
+  "title": "Test \u003ccolor\u003e with \u003ctext\u003e",
+  "description": "",
+  "tags": [
+    {
+      "name": "Notused",
+      "type": "tag",
+      "displayName": "Notused"
+    },
+    {
+      "name": "can",
+      "type": "tag",
+      "displayName": "can"
+    },
+    {
+      "name": "aha",
+      "type": "tag",
+      "displayName": "aha"
+    }
+  ],
+  "startTime": "2024-04-25T17:07:13.006101500+02:00[Europe/Vienna]",
+  "duration": 13,
+  "projectKey": "",
+  "isManualTestingUpToDate": false,
+  "dataTable": {
+    "headers": [
+      "color",
+      "text"
+    ],
+    "rows": [
+      {
+        "values": [
+          "green",
+          "aha"
+        ],
+        "lineNumber": 12,
+        "result": "SUCCESS"
+      },
+      {
+        "values": [
+          "red",
+          "bhb"
+        ],
+        "lineNumber": 14,
+        "result": "SUCCESS"
+      },
+      {
+        "values": [
+          "red",
+          "DONT USE"
+        ],
+        "lineNumber": 19,
+        "result": "SUCCESS"
+      },
+      {
+        "values": [
+          "green",
+          "can"
+        ],
+        "lineNumber": 26,
+        "result": "SUCCESS"
+      },
+      {
+        "values": [
+          "red",
+          "cbn"
+        ],
+        "lineNumber": 28,
+        "result": "SUCCESS"
+      },
+      {
+        "values": [
+          "black",
+          "ccn"
+        ],
+        "lineNumber": 29,
+        "result": "SUCCESS"
+      }
+    ],
+    "predefinedRows": true,
+    "scenarioOutline": "Given TGR show \u003ccolor\u003e banner \"\u003ctext\u003e\"\n\rAnd TGR clear recorded messages\n\rThen TGR clear recorded messages\n\r",
+    "dataSetDescriptors": [
+      {
+        "startRow": 0,
+        "rowCount": 2,
+        "name": "",
+        "description": "",
+        "tags": [
+          {
+            "name": "aha",
+            "type": "tag",
+            "displayName": "aha"
+          }
+        ]
+      },
+      {
+        "startRow": 2,
+        "rowCount": 1,
+        "name": "",
+        "description": "",
+        "tags": [
+          {
+            "name": "Notused",
+            "type": "tag",
+            "displayName": "Notused"
+          }
+        ]
+      },
+      {
+        "startRow": 3,
+        "rowCount": 0,
+        "name": "",
+        "description": "",
+        "tags": [
+          {
+            "name": "can",
+            "type": "tag",
+            "displayName": "can"
+          }
+        ]
+      }
+    ]
+  },
+  "manual": false,
+  "testSource": "Cucumber",
+  "order": 0,
+  "result": "SUCCESS",
+  "scenarioOutline": "Given TGR show \u003ccolor\u003e banner \"\u003ctext\u003e\"\nAnd TGR clear recorded messages\nThen TGR clear recorded messages"
+}

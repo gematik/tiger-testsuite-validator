@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite errors="0" failures="0" name="Stop and start a server, should work" skipped="0" tests="2" time="2.14"
+           timestamp="2024-04-25 05:07:07">
+    <testcase name="Stop and restart remote TigerProxy"/>
+    <testcase name="Stop and restart HttpBin"/>
+</testsuite>

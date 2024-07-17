@@ -1,0 +1,70 @@
+{
+  "name": "Parse Tgr file check response 1",
+  "id": "provide-a-test-to-check-if-parsing-of-tgr-file-works;parse-tgr-file-check-response-1",
+  "scenarioId": "tiger-test-lib/readTrafficFiles:Parse Tgr file check response 1",
+  "methodName": "Parse Tgr file check response 1",
+  "testSteps": [
+    {
+      "number": 1,
+      "description": "Given TGR reads the following .tgr file \"src/test/resources/testdata/rezepsFiltered.tgr\"",
+      "duration": 2411,
+      "startTime": "2024-04-25T17:07:03.912929628+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 2,
+      "description": "Then TGR find last request to path \"/VAUCertificate\"",
+      "duration": 504,
+      "startTime": "2024-04-25T17:07:06.324530267+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 3,
+      "description": "And TGR current response with attribute \"$.body.issuer.O\" matches \"gematik GmbH NOT-VALID\"",
+      "duration": 1,
+      "startTime": "2024-04-25T17:07:06.829616010+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "RBellog 0",
+          "path": "downloadable/downloadable-0a1fe672-5e6b-4d64-a2c0-67ee0d86ca9c-rbel_Parse_Tgr_file_check_response_1_2024-04-25_17-07-07.html",
+          "isEvidence": true,
+          "id": "report-data-83c5b679-59fa-4f7b-bae6-223af4dedc72"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    }
+  ],
+  "userStory": {
+    "id": "tiger-test-lib/readTrafficFiles",
+    "storyName": "Provide a test to check if parsing of tgr file works",
+    "displayName": "Provide a test to check if parsing of tgr file works",
+    "path": "tiger-test-lib/readTrafficFiles",
+    "pathElements": [
+      {
+        "name": "tiger-test-lib",
+        "description": ""
+      },
+      {
+        "name": "readTrafficFiles",
+        "description": ""
+      }
+    ],
+    "type": "feature"
+  },
+  "title": "Parse Tgr file check response 1",
+  "description": "",
+  "startTime": "2024-04-25T17:07:03.907317704+02:00[Europe/Vienna]",
+  "duration": 2416,
+  "projectKey": "",
+  "isManualTestingUpToDate": false,
+  "manual": false,
+  "testSource": "Cucumber",
+  "order": 0,
+  "result": "SUCCESS"
+}

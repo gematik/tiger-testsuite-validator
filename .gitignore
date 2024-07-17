@@ -1,0 +1,5 @@
+/testdata/report/downloadable/*.html
+/target
+/.idea
+
+jenkinsfiles

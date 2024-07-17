@@ -1,0 +1,207 @@
+{
+  "name": "Test deactivate followRedirects",
+  "id": "http/https-gluecode-test-feature;test-deactivate-followredirects",
+  "scenarioId": "tiger-test-lib/HttpGlueCodeTest:Test deactivate followRedirects",
+  "methodName": "Test deactivate followRedirects",
+  "testSteps": [
+    {
+      "number": 1,
+      "description": "Given TGR clear recorded messages",
+      "duration": 1,
+      "startTime": "2024-04-25T17:07:03.283961944+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 2,
+      "description": "When TGR disable HttpClient followRedirects configuration",
+      "duration": 1,
+      "startTime": "2024-04-25T17:07:03.285837172+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 3,
+      "description": "And TGR send empty GET request to \"http://httpbin/redirect-to?url\u003d!{urlEncoded(\u0027http://httpbin/status/200\u0027)}\"",
+      "duration": 87,
+      "startTime": "2024-04-25T17:07:03.287441062+02:00[Europe/Vienna]",
+      "result": "SUCCESS",
+      "reportData": [
+        {
+          "title": "cURL",
+          "contents": "curl -v -H \"key: value\" -H \"Accept: */*\" -H \"Content-Type: application/json\" -X GET \"http://httpbin/redirect-to?url\u003dhttp%3A%2F%2Fhttpbin%2Fstatus%2F200\" ",
+          "isEvidence": false,
+          "id": "report-data-c65da65e-cc7c-44e2-930b-de1795b59b4a"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 4,
+      "description": "Then TGR find the last request",
+      "duration": 4,
+      "startTime": "2024-04-25T17:07:03.375731647+02:00[Europe/Vienna]",
+      "exception": {
+        "errorType": "de.gematik.test.tiger.lib.TigerLibraryException",
+        "message": "No Request found.",
+        "stackTrace": [
+          {
+            "declaringClass": "de.gematik.test.tiger.lib.rbel.RbelMessageValidator",
+            "methodName": "lambda$findLastRequest$20",
+            "fileName": "RbelMessageValidator.java",
+            "lineNumber": 555
+          },
+          {
+            "declaringClass": "de.gematik.test.tiger.lib.rbel.RbelMessageValidator",
+            "methodName": "findLastRequest",
+            "fileName": "RbelMessageValidator.java",
+            "lineNumber": 555
+          },
+          {
+            "declaringClass": "de.gematik.test.tiger.glue.RBelValidatorGlue",
+            "methodName": "findLastRequest",
+            "fileName": "RBelValidatorGlue.java",
+            "lineNumber": 291
+          },
+          {
+            "declaringClass": "✽",
+            "methodName": "TGR find the last request",
+            "fileName": "file:///home/thomas/IdeaProjects/tiger/tiger-test-lib/src/test/resources/features/tiger-test-lib/HttpGlueCodeTest.feature",
+            "lineNumber": 170
+          }
+        ]
+      },
+      "result": "ERROR",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 5,
+      "description": "Then TGR current response with attribute \"$.responseCode\" matches \"302\"",
+      "duration": 0,
+      "startTime": "2024-04-25T17:07:03.380693885+02:00[Europe/Vienna]",
+      "result": "SKIPPED",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 6,
+      "description": "And TGR current response with attribute \"$.header.Location\" matches \"http://httpbin/status/200\"",
+      "duration": 0,
+      "startTime": "2024-04-25T17:07:03.383588104+02:00[Europe/Vienna]",
+      "result": "SKIPPED",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 7,
+      "description": "When TGR reset HttpClient followRedirects configuration",
+      "duration": 0,
+      "startTime": "2024-04-25T17:07:03.386294722+02:00[Europe/Vienna]",
+      "result": "SKIPPED",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 8,
+      "description": "And TGR send empty GET request to \"http://httpbin/redirect-to?url\u003d!{urlEncoded(\u0027http://httpbin/status/200\u0027)}\"",
+      "duration": 0,
+      "startTime": "2024-04-25T17:07:03.389534762+02:00[Europe/Vienna]",
+      "result": "SKIPPED",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 9,
+      "description": "Then TGR find the last request",
+      "duration": 0,
+      "startTime": "2024-04-25T17:07:03.394235067+02:00[Europe/Vienna]",
+      "result": "SKIPPED",
+      "precondition": false,
+      "level": 0
+    },
+    {
+      "number": 10,
+      "description": "Then TGR current response with attribute \"$.responseCode\" matches \"200\"",
+      "duration": 0,
+      "startTime": "2024-04-25T17:07:03.396791184+02:00[Europe/Vienna]",
+      "result": "SKIPPED",
+      "reportData": [
+        {
+          "title": "RBellog 0",
+          "path": "downloadable/downloadable-0f8ecddd-56a1-4664-9a11-94b1d7c4accb-rbel_Test_deactivate_followRedirects_2024-04-25_17-07-03.html",
+          "isEvidence": true,
+          "id": "report-data-fdf278d5-1a49-413e-bf3c-39935727bc3b"
+        }
+      ],
+      "precondition": false,
+      "level": 0
+    }
+  ],
+  "userStory": {
+    "id": "tiger-test-lib/HttpGlueCodeTest",
+    "storyName": "HTTP/HTTPS GlueCode Test feature",
+    "displayName": "HTTP/HTTPS GlueCode Test feature",
+    "path": "tiger-test-lib/HttpGlueCodeTest",
+    "pathElements": [
+      {
+        "name": "tiger-test-lib",
+        "description": ""
+      },
+      {
+        "name": "HttpGlueCodeTest",
+        "description": ""
+      }
+    ],
+    "type": "feature"
+  },
+  "title": "Test deactivate followRedirects",
+  "description": "",
+  "backgroundTitle": "",
+  "backgroundDescription": "",
+  "startTime": "2024-04-25T17:07:03.280095240+02:00[Europe/Vienna]",
+  "duration": 5,
+  "testFailureCause": {
+    "errorType": "de.gematik.test.tiger.lib.TigerLibraryException",
+    "message": "No Request found.",
+    "stackTrace": [
+      {
+        "declaringClass": "de.gematik.test.tiger.lib.rbel.RbelMessageValidator",
+        "methodName": "lambda$findLastRequest$20",
+        "fileName": "RbelMessageValidator.java",
+        "lineNumber": 555
+      },
+      {
+        "declaringClass": "de.gematik.test.tiger.lib.rbel.RbelMessageValidator",
+        "methodName": "findLastRequest",
+        "fileName": "RbelMessageValidator.java",
+        "lineNumber": 555
+      },
+      {
+        "declaringClass": "de.gematik.test.tiger.glue.RBelValidatorGlue",
+        "methodName": "findLastRequest",
+        "fileName": "RBelValidatorGlue.java",
+        "lineNumber": 291
+      },
+      {
+        "declaringClass": "✽",
+        "methodName": "TGR find the last request",
+        "fileName": "file:///home/thomas/IdeaProjects/tiger/tiger-test-lib/src/test/resources/features/tiger-test-lib/HttpGlueCodeTest.feature",
+        "lineNumber": 170
+      }
+    ]
+  },
+  "testFailureClassname": "de.gematik.test.tiger.lib.TigerLibraryException",
+  "testFailureMessage": "No Request found.",
+  "testFailureSummary": "ERROR;de.gematik.test.tiger.lib.TigerLibraryException;No Request found.;RbelMessageValidator.java",
+  "projectKey": "",
+  "annotatedResult": "ERROR",
+  "isManualTestingUpToDate": false,
+  "manual": false,
+  "testSource": "Cucumber",
+  "order": 0,
+  "result": "ERROR"
+}
