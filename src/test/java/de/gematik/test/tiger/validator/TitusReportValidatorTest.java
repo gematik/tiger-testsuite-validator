@@ -26,12 +26,10 @@ import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-@Slf4j
-class TitusReportValidatorTest {
+class TitusReportValidatorTest extends MethodStartLoggerTestClass {
 
   Map<String, String> featureFilesMap = new HashMap<>();
   static final Path zipPath = Paths.get("testdata/titus/report.zip");
@@ -67,7 +65,8 @@ class TitusReportValidatorTest {
           try {
             featureFilesMap.put(file, Files.readString(Paths.get(file)));
           } catch (IOException e) {
-            log.error("Error reading file '{}'", file, e);
+            log().error("Error reading file '{}'", file, e);
+            throw new RuntimeException("Error reading file '" + file + "'", e);
           }
         });
   }
@@ -104,7 +103,6 @@ class TitusReportValidatorTest {
 
   @Test
   void readAndValidateMultipleFilesWithFailure_EXC() {
-
     Throwable thrown =
         catchThrowable(
             () ->
@@ -112,16 +110,16 @@ class TitusReportValidatorTest {
                     new ZipInputStream(
                         Files.newInputStream(Paths.get("testdata/titus/report.zip"))),
                     featureFilesMap));
-    log.info("Exception {}", thrown.getMessage());
+    log().info("Exception {}", thrown.getMessage());
     assertThat(thrown)
         .isInstanceOf(ReportValidationException.class)
-        .hasMessageContaining("not reported as successful");
+        .hasMessageContaining("ist nicht als erfolgreich hinterlegt");
   }
 
   @Test
   void readAndValidateMultipleFilesWithError_EXC() throws Exception {
 
-    // remove the failure json report data of first optional scenario as first fails and second
+    // remove the failure JSON report data of the first optional scenario as first fails and second
     // errors
     // report.getScenarioResults().remove("HttpGlueCodeTestTest find last request");
     // 0ff6c45977f119a676e68067b247cea0c821cd7acd6d9b4607d5c6551323b423.json
@@ -133,10 +131,10 @@ class TitusReportValidatorTest {
                     new ZipInputStream(
                         Files.newInputStream(Paths.get("testdata/titus/report.zip"))),
                     featureFilesMap));
-    log.info("Exception {}", thrown.getMessage());
+    log().info("Exception {}", thrown.getMessage());
     assertThat(thrown)
         .isInstanceOf(ReportValidationException.class)
-        .hasMessageContaining("not reported as successful");
+        .hasMessageContaining("ist nicht als erfolgreich hinterlegt");
   }
 
   @Test
@@ -152,14 +150,14 @@ class TitusReportValidatorTest {
     ReportValidator.parseTitusReport(
         new ZipInputStream(Files.newInputStream(Paths.get("testdata/titus/report.zip"))),
         featureFilesMap);
-    log.info("Report validated successfully");
+    log().info("Report validated successfully");
   }
 
   @Test
   void readAndValidateMultipleFilesWithStepMismatch_EXC() throws IOException {
     TestReport report = new TestReport();
     report.parseReport("testdata/tiger-test-lib/report");
-    // replace with "invalid" version where a step in the report mismatches
+    // This test replaces a valid JSON with an "invalid" version where a step in the report mismatches
     // report.getScenarioResults().remove("HttpGlueCodeTestGet Request with custom and default
     // header, check body, application type url encoded");
     addEntryToZipReport(
@@ -173,9 +171,10 @@ class TitusReportValidatorTest {
                                       new ZipInputStream(
                                               Files.newInputStream(Paths.get("testdata/titus/report.zip"))),
                                       featureFilesMap));
-      log.info("Exception {}", thrown.getMessage());
-      assertThat(thrown)
-              .isInstanceOf(ReportValidationException.class)
-              .hasMessageContaining("mismatching step");
+      log().info("Exception {}", thrown.getMessage());
+    assertThat(thrown)
+        .isInstanceOf(ReportValidationException.class)
+        .hasMessageContaining(
+            "sind die berichteten Schritte nicht identisch mit den erwarteten Schritten");
   }
 }

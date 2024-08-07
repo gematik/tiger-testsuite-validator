@@ -16,18 +16,33 @@
 
 package de.gematik.test.tiger.validator;
 
-import java.nio.file.Path;
+import java.text.MessageFormat;
+import java.util.Map;
 
 public class ParserException extends RuntimeException {
-  public ParserException(String message, Path file) {
-    super(message + forFileString(file));
+
+  public enum MessageId {
+    NO_ENVELOPE,
+    NO_GHERKIN_DOC,
+    NO_FEATURE_PICKLE,
+    STEPLIST_EMPTY,
+    DUPLICATE_FILE
   }
 
-  public ParserException(String message) {
-    super(message);
-  }
+  public static final Map<MessageId, String> ERROR_MESSAGES =
+      Map.of(
+          MessageId.NO_ENVELOPE,
+          "Die Feature Datei ''{0}'' scheint nicht korrekt zu sein (NO_ENVELOPE)",
+          MessageId.NO_GHERKIN_DOC,
+          "Die Feature Datei ''{0}'' scheint nicht korrekt zu sein (NO_GHERKIN_DOC)",
+          MessageId.NO_FEATURE_PICKLE,
+          "Die Feature Datei ''{0}'' scheint nicht korrekt zu sein (NO_FEATURE_PICKLE)",
+          MessageId.STEPLIST_EMPTY,
+          "Testergebnis für den Schritt ''{0}'' in der JSON Datei ''{1}'' ist leer",
+          MessageId.DUPLICATE_FILE,
+          "Eine Feature Datei mit einem identen Namen wurde in folgendem Ordner ''{0}'' gefunden");
 
-  private static String forFileString(Path file) {
-    return " for file '" + file.toUri() + "'";
+  public ParserException(MessageId msgId, Object... args) {
+    super(MessageFormat.format(ERROR_MESSAGES.get(msgId), args));
   }
 }

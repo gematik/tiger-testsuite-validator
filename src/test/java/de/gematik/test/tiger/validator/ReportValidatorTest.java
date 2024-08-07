@@ -23,12 +23,10 @@ import de.gematik.test.tiger.validator.model.TestResult;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-@Slf4j
-class ReportValidatorTest {
+class ReportValidatorTest extends MethodStartLoggerTestClass {
 
     List<String> featureFiles;
 
@@ -48,7 +46,7 @@ class ReportValidatorTest {
         report.parseReport("testdata/tiger-test-lib/report");
 
         ReportValidator validator = new ReportValidator(parser, report);
-        runAndCheckException(validator, "not reported as successful");
+        runAndCheckException(validator, "nicht als erfolgreich hinterlegt");
     }
 
     @Test
@@ -59,11 +57,11 @@ class ReportValidatorTest {
 
         TestReport report = new TestReport();
         report.parseReport("testdata/tiger-test-lib/report");
-        // remove the failure json report data of first optional scenario as first fails and second errors
+        // remove the failure JSON report data of the first optional scenario as first fails and second errors
         report.getScenarioResults().remove("HttpGlueCodeTestTest find last request");
 
         ReportValidator validator = new ReportValidator(parser, report);
-        runAndCheckException(validator, "not reported as successful");
+        runAndCheckException(validator, "nicht als erfolgreich hinterlegt");
     }
     @Test
     void readAndValidateMultipleFilesWithSuccessNoOptionalFailedResults_OK() throws IOException {
@@ -73,15 +71,16 @@ class ReportValidatorTest {
 
         TestReport report = new TestReport();
         report.parseReport("testdata/tiger-test-lib/report");
-        // remove the failure json report data of two optional scenarios as first fails and second errors
-        // third optional has state SUCCESS, so we keep it to also check for optional testresults being included
+        // remove the failure JSON report data of two optional scenarios as first fails and second errors
+        // third optional has state SUCCESS,
+        // so we keep it to also check for optional test results being included
         report.getScenarioResults().remove("HttpGlueCodeTestTest find last request");
         report.getScenarioResults().remove("HttpGlueCodeTestTest deactivate followRedirects");
 
         ReportValidator validator = new ReportValidator(parser, report);
         TestResult result = validator.validateReport();
         assertThat(result).isEqualByComparingTo(TestResult.SUCCESS);
-        log.info("Report validated successfully");
+        log().info("Report validated successfully");
     }
 
     @Test
@@ -97,12 +96,22 @@ class ReportValidatorTest {
         report.parseReport("testdata/tiger-test-lib/invalid_reports");
 
         ReportValidator validator = new ReportValidator(parser, report);
-        runAndCheckException(validator, "mismatching step");
+        runAndCheckException(validator, "sind die berichteten Schritte nicht identisch mit den erwarteten Schritten");
     }
 
+
+    @Test
+    void checkEmptyFeatureFilesListFails_EXC() throws IOException {
+        SuiteParser parser = new SuiteParser();
+        parser.parseTestsuite(List.of());
+        TestReport report = new TestReport();
+        report.parseReport("testdata/tiger-test-lib/report");
+        ReportValidator validator = new ReportValidator(parser, report);
+        runAndCheckException(validator, "Eine leere Testsuite ist ungültig");
+    }
     private void runAndCheckException(ReportValidator validator, String partOfMessage) {
         Throwable thrown = catchThrowable(validator::validateReport);
-        log.info("Exception {}", thrown.getMessage());
+        log().info("Exception {}", thrown.getMessage());
         assertThat(thrown).isInstanceOf(ReportValidationException.class).hasMessageContaining(partOfMessage);
     }
 

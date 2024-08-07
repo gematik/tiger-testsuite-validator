@@ -28,8 +28,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 
 /**
- * parses all given feature files and creates a map of all parsed features with their filenames (without extension) as
- * key. If any file is invalid, the parsing continues with the next file(s).
+ * Parses all given feature files and creates a map of all parsed features with their filenames
+ * (without the extension) as the key.
+ * If any file is invalid, the parsing continues with the next file(s).
  * If there are two files detected with the same name will abort. See Readme.md
  */
 @Getter
@@ -78,27 +79,24 @@ public class SuiteParser {
               .build()
               .parse(envelope)
               .findFirst()
-              .orElseThrow(() -> new ParserException("Unable to find envelope for " + filePathUri))
+              .orElseThrow(() -> new ParserException(ParserException.MessageId.NO_ENVELOPE, filePathUri))
               .getGherkinDocument()
-              .orElseThrow(() -> new ParserException("Unable to find gherkin document for " + filePathUri));
+              .orElseThrow(() -> new ParserException(ParserException.MessageId.NO_GHERKIN_DOC, filePathUri));
 
 
           dubletteFeature = fileFeatureMap.put(
               FilenameUtils.removeExtension(Paths.get(filePathUri).toFile().getName()),
               gherkinDocument
                   .getFeature()
-                  .orElseThrow(() -> new ParserException("Unable to access feature pickle for "+ filePathUri)));
+                  .orElseThrow(() -> new ParserException(ParserException.MessageId.NO_FEATURE_PICKLE, filePathUri)));
           if (dubletteFeature == null) {
-            log.info("Added Feature {}", gherkinDocument.getFeature().get().getName());
+            log.info("Added Feature {}", gherkinDocument.getFeature().get().getName()); //NOSONAR
           }
     } catch (ParserException e) {
       log.error("Parse error for file '{}'", filePathUri, e);
     }
     if (dubletteFeature != null) {
-      throw new ParserException(
-              "Found a feature file that has the same file name in different folders '"
-                      + filePathUri
-                      + "'");
+      throw new ParserException(ParserException.MessageId.DUPLICATE_FILE, filePathUri);
     }
   }
 }
