@@ -21,16 +21,19 @@ import io.cucumber.cienvironment.internal.com.eclipsesource.json.JsonArray;
 import io.cucumber.cienvironment.internal.com.eclipsesource.json.JsonObject;
 import io.cucumber.messages.types.Background;
 import io.cucumber.messages.types.Scenario;
+import java.nio.file.Path;
 import java.util.Optional;
 import lombok.Getter;
 
-/** base class for scenario / scenario outline as read from a test report json file */
+/** base class for scenario / scenario outline as read from a test report JSON file */
 @Getter
 public abstract class ScenarioResult {
   protected String filename;
   protected String scenarioName;
   protected TestResult overallResult;
   protected final JsonArray steps;
+
+  static final String TEST_STEPS = "testSteps";
 
   protected ScenarioResult(JsonObject json) {
     JsonArray pathElements = json.get("userStory").asObject().get("pathElements").asArray();
@@ -42,21 +45,28 @@ public abstract class ScenarioResult {
 
     scenarioName = json.getString("name", "undefined scenario name");
     overallResult = TestResult.valueOf(json.getString("result", "FAILURE"));
-    steps = json.get("testSteps").asArray();
+    steps = json.get(TEST_STEPS).asArray();
   }
 
-  public static ScenarioResult createResult(JsonObject json) {
-    JsonArray steps = json.get("testSteps").asArray();
-    if (steps.isEmpty()) {
-      throw new ParserException("Testreport result for " + json.getString("name", "undefined result") + " - step list is empty");
+  public static ScenarioResult createResult(JsonObject json, Path jsonPath) {
+    if (json.get(TEST_STEPS) == null) {
+      throw new ParserException(
+          ParserException.MessageId.STEPLIST_EMPTY,
+          json.getString("name", "undefined result"),
+          jsonPath);
     }
-
-      if (steps.get(0).asObject().get("children") == null) {
+    JsonArray steps = json.get(TEST_STEPS).asArray();
+    if (steps.isEmpty()) {
+      throw new ParserException(
+          ParserException.MessageId.STEPLIST_EMPTY,
+          json.getString("name", "undefined result"),
+          jsonPath);
+    }
+    if (steps.get(0).asObject().get("children") == null) {
       return new SimpleScenarioResult(json);
     } else {
       return new ScenarioOutlineResult(json);
     }
-
   }
 
   @SuppressWarnings("OptionalUsedAsFieldOrParameterType")

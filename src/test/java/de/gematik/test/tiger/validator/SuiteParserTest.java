@@ -22,10 +22,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class SuiteParserTest {
+class SuiteParserTest extends MethodStartLoggerTestClass {
   List<String> featureFiles;
 
   @BeforeEach

@@ -41,15 +41,15 @@ public class SimpleScenarioResult extends ScenarioResult {
 
     if (overallResult != TestResult.SUCCESS) {
       throw new ReportValidationException(
-          "Scenario '" + scenario.getName() + "' was not reported as successful");
+          ReportValidationException.MessageId.SCENARIO_NOT_OK, scenario.getName());
     }
     steps.forEach(
         step -> {
           if (!step.asObject().getString("result", "UNKNOWN").equals("SUCCESS")) {
             throw new ReportValidationException(
-                "Step '"
-                    + step.asObject().getString("description", "undefined step")
-                    + "' was not successful");
+                ReportValidationException.MessageId.STEP_NOT_OK,
+                step.asObject().getString("description", "undefined step"),
+                scenario.getName());
           }
         });
 
@@ -65,18 +65,15 @@ public class SimpleScenarioResult extends ScenarioResult {
 
           if (!checkTestResult(steps.get(stepIndex.get()).asObject())) {
             throw new ReportValidationException(
-                "Scenario " + scenario.getName() + " has failed step '" + reportedStep + "'");
+                ReportValidationException.MessageId.STEP_NOT_OK, reportedStep, scenario.getName());
           }
 
           if (!ScenarioHelper.getStepDescription(step).equals(reportedStep)) {
             throw new ReportValidationException(
-                "Scenario "
-                    + scenario.getName()
-                    + " has mismatching step '"
-                    + ScenarioHelper.getStepDescription(step)
-                    + "' vs '"
-                    + reportedStep
-                    + "'");
+                ReportValidationException.MessageId.STEP_MISMATCH,
+                scenario.getName(),
+                ScenarioHelper.getStepDescription(step),
+                reportedStep);
           }
           stepIndex.getAndIncrement();
         });

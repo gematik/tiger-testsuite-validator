@@ -50,28 +50,28 @@ public class ScenarioOutlineResult extends ScenarioResult {
                   TestResult.valueOf(variantStep.getString("result", "undefined result"));
               if (result != TestResult.SUCCESS) {
                 throw new ReportValidationException(
-                    "Scenario outline '" + scenario.getName() + "' was not report as successful");
+                    ReportValidationException.MessageId.SCENARIO_NOT_OK, scenario.getName());
               }
 
               // get all expected steps, replace all parameters <%s> in text and
               // check all of them to match testSteps[rowCtr].children
 
               List<Step> expectedSteps = new ArrayList<>();
-              backgroundOptional.ifPresent(background -> expectedSteps.addAll(background.getSteps()));
+              backgroundOptional.ifPresent(
+                  background -> expectedSteps.addAll(background.getSteps()));
               expectedSteps.addAll(scenario.getSteps());
 
               AtomicInteger stepCtr = new AtomicInteger();
-              expectedSteps
-                  .forEach(
-                      step -> {
-                        validateStep(
-                            scenario,
-                            getStepTextAndReplaceParamTokens(tableRow, step, headersOptional),
-                            variantStep,
-                            stepCtr.get(),
-                            rowCtr.get());
-                        stepCtr.getAndIncrement();
-                      });
+              expectedSteps.forEach(
+                  step -> {
+                    validateStep(
+                        scenario,
+                        getStepTextAndReplaceParamTokens(tableRow, step, headersOptional),
+                        variantStep,
+                        stepCtr.get(),
+                        rowCtr.get());
+                    stepCtr.getAndIncrement();
+                  });
 
               rowCtr.getAndIncrement();
             });
@@ -94,14 +94,11 @@ public class ScenarioOutlineResult extends ScenarioResult {
 
     if (!reportedStep.equals(stepText)) {
       throw new ReportValidationException(
-          "Step mismatch in scenario '"
-              + scenario.getName()
-              + "' Variant "
-              + rowCtr
-              + "\nReported:"
-              + reportedStep
-              + "\nExpected:"
-              + stepText);
+          ReportValidationException.MessageId.UNEXPECTED_STEP,
+          scenario.getName(),
+          rowCtr,
+          stepText,
+          reportedStep);
     }
   }
 

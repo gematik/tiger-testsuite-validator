@@ -58,7 +58,7 @@ public class ReportValidator {
   public TestResult validateReport() {
     AtomicReference<TestResult> validationResult = new AtomicReference<>(TestResult.SUCCESS);
     if (suiteParser.getFileFeatureMap().isEmpty()) {
-      throw new ReportValidationException("Empty testsuite is invalid!");
+      throw new ReportValidationException(ReportValidationException.MessageId.EMPTY_SUITE);
     }
     suiteParser
         .getFileFeatureMap()
@@ -100,10 +100,15 @@ public class ReportValidator {
     if (scenarioResult == null) {
       if (isMandatory(scenario.getTags())) {
         throw new ReportValidationException(
-            "Mandatory Scenario '" + scenario.getName() + "' missing in report!");
+            ReportValidationException.MessageId.MANDATORY_SCENARIO_NOT_FOUND, scenario.getName());
       }
     } else {
-      scenarioResult.validateSteps(scenario, backgroundOptional);
+      try {
+        scenarioResult.validateSteps(scenario, backgroundOptional);
+      } catch (ReportValidationException rve) {
+        validationResult.set(TestResult.FAILURE);
+        throw rve;
+      }
     }
   }
 
