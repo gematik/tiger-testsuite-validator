@@ -45,7 +45,16 @@ public class ReportValidator {
     SuiteParser suiteParser = new SuiteParser();
     suiteParser.parseTestsuiteFromTitus(featureFiles);
     TestReport testReport = new TestReport();
-    testReport.parseReportFromTitus(reportStream);
+    testReport.parseReportFromTitus(reportStream, Optional.empty());
+    ReportValidator reportValidator = new ReportValidator(suiteParser, testReport);
+    reportValidator.validateReport();
+  }
+
+  public static void parseTitusReport(ZipInputStream reportStream, Map<String, String> featureFiles, String version) {
+    SuiteParser suiteParser = new SuiteParser();
+    suiteParser.parseTestsuiteFromTitus(featureFiles);
+    TestReport testReport = new TestReport();
+    testReport.parseReportFromTitus(reportStream, Optional.of(version));
     ReportValidator reportValidator = new ReportValidator(suiteParser, testReport);
     reportValidator.validateReport();
   }

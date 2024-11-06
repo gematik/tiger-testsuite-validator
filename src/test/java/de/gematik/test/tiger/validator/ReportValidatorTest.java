@@ -37,7 +37,7 @@ class ReportValidatorTest extends MethodStartLoggerTestClass {
     }
 
     @Test
-    void readAndValidateMultipleFilesWithFailure_EXC() throws IOException {
+    void readAndValidateMultipleFilesWithFailure_shouldThrowException() throws IOException {
         SuiteParser parser = new SuiteParser();
         parser.parseTestsuite(featureFiles);
         assertThat(parser.getFileFeatureMap()).hasSize(7);
@@ -50,7 +50,7 @@ class ReportValidatorTest extends MethodStartLoggerTestClass {
     }
 
     @Test
-    void readAndValidateMultipleFilesWithError_EXC() throws IOException {
+    void readAndValidateMultipleFilesWithError_shouldThrowException() throws IOException {
         SuiteParser parser = new SuiteParser();
         parser.parseTestsuite(featureFiles);
         assertThat(parser.getFileFeatureMap()).hasSize(7);
@@ -84,7 +84,7 @@ class ReportValidatorTest extends MethodStartLoggerTestClass {
     }
 
     @Test
-    void readAndValidateMultipleFilesWithStepMismatch_EXC() throws IOException {
+    void readAndValidateMultipleFilesWithStepMismatch_shouldThrowException() throws IOException {
         SuiteParser parser = new SuiteParser();
         parser.parseTestsuite(featureFiles);
         assertThat(parser.getFileFeatureMap()).hasSize(7);
@@ -101,7 +101,7 @@ class ReportValidatorTest extends MethodStartLoggerTestClass {
 
 
     @Test
-    void checkEmptyFeatureFilesListFails_EXC() throws IOException {
+    void checkEmptyFeatureFilesListFails_shouldThrowException() throws IOException {
         SuiteParser parser = new SuiteParser();
         parser.parseTestsuite(List.of());
         TestReport report = new TestReport();
@@ -111,7 +111,6 @@ class ReportValidatorTest extends MethodStartLoggerTestClass {
     }
     private void runAndCheckException(ReportValidator validator, String partOfMessage) {
         Throwable thrown = catchThrowable(validator::validateReport);
-        log().info("Exception {}", thrown.getMessage());
         assertThat(thrown).isInstanceOf(ReportValidationException.class).hasMessageContaining(partOfMessage);
     }
 

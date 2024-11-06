@@ -25,6 +25,7 @@ import java.nio.file.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import lombok.Getter;
@@ -35,20 +36,51 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TestReport {
   /**
-   * Map containing all result data from parsed JSON files.
-   * Key of the map is a concatenation of feature file name (without path and extension) and scenario name
+   * Map containing all result data from parsed JSON files. Key of the map is a concatenation of
+   * feature file name (without path and extension) and scenario name
    */
   Map<String, ScenarioResult> scenarioResults = new HashMap<>();
 
+  /**
+   * @param reportStream inout stream to zip archive to be validated
+   * @deprecated replaced by the method with additional bundleVersion param
+   * @since 1.1.0
+   */
+  @Deprecated(since = "1.1.0", forRemoval = true)
   public void parseReportFromTitus(ZipInputStream reportStream) {
+    parseReportFromTitus(reportStream, Optional.empty());
+  }
+
+  /**
+   * parses json result files from zip archive and if bundleVersion is not null also checks that the
+   * project version in the pom.xml file matches the given bundleVersion param.
+   *
+   * @param reportStream inout stream to zip archive to be validated
+   * @param bundleVersion expected version to be found in pom.xml, null if no version check shall be
+   *     performed
+   */
+  @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+  public void parseReportFromTitus(
+      ZipInputStream reportStream, Optional<String> bundleVersion) {
     try {
+      boolean versionChecked = false;
       ZipEntry entry;
-      while ((entry = reportStream.getNextEntry()) != null) { //NOSONAR - security checks are done on titus side
+      while ((entry =
+              reportStream.getNextEntry()) // NOSONAR - security checks are done on titus side
+          != null) {
+        if (bundleVersion.isPresent() && entry.getName().equals("pom.xml")) {
+          checkVersionMatches(new String(reportStream.readAllBytes()), bundleVersion.get());
+          versionChecked = true;
+        }
         if (entry.getName().endsWith(".json")
             && !(entry.getName().startsWith("bootstrap") || entry.getName().startsWith("nivo"))) {
           log.info("Parsing zip report file '{}'", entry.getName());
           parseScenarioJsonResult(new String(reportStream.readAllBytes()), entry.getName());
         }
+      }
+      if (bundleVersion.isPresent() && !versionChecked) {
+        throw new ReportValidationException(
+            ReportValidationException.MessageId.NO_BUNDLE_VERSION_FILE);
       }
     } catch (IOException ioe) {
       throw new ReportValidationException(ReportValidationException.MessageId.ERR_READ_ZIP, ioe);
@@ -86,5 +118,23 @@ public class TestReport {
     ScenarioResult scenario =
         ScenarioResult.createResult(Json.parse(json).asObject(), Path.of("ZIP Archiv", entryName));
     scenarioResults.put(scenario.getFilename() + scenario.getScenarioName(), scenario);
+  }
+
+  public static String extractProjectVersionFromPomXml(String pomXml) {
+    int start = pomXml.indexOf("<version>");
+    int end = pomXml.indexOf("</version>");
+    if (start == -1 || end == -1 || end <= start) {
+      throw new ReportValidationException(
+              ReportValidationException.MessageId.NO_VALID_BUNDLE_VERSION);
+    }
+    return pomXml.substring(start + "<version>".length(), end);
+  }
+
+  public void checkVersionMatches(String pomXml, String bundleVersion) {
+    String pomVersion = extractProjectVersionFromPomXml(pomXml);
+    if (!bundleVersion.equals(pomVersion)) {
+      throw new ReportValidationException(
+          ReportValidationException.MessageId.BUNDLE_VERSION_MISMATCH, pomVersion);
+    }
   }
 }

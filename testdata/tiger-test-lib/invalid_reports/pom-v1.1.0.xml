@@ -34,7 +34,6 @@
         <version.maven>3.9.4</version.maven>
         <version.maven.failsafe>3.2.5</version.maven.failsafe>
         <version.maven.surefire>3.2.5</version.maven.surefire>
-        <mycila.license-maven-plugin.version>4.6</mycila.license-maven-plugin.version>
 
         <spotless.google-java-format.version>1.18.1</spotless.google-java-format.version>
         <spotless-maven-plugin.version>2.43.0</spotless-maven-plugin.version>
@@ -186,41 +185,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <version>${mycila.license-maven-plugin.version}</version>
-                <configuration>
-                    <licenseSets>
-                        <licenseSet>
-                            <header>doc/license.header.txt</header>
-                            <includes>
-                                <include>**/target/**</include>
-                                <include>**/src/**</include>
-                                <include>**/target/generated-*/**</include>
-                            </includes>
-                            <useDefaultExcludes>true</useDefaultExcludes>
-                        </licenseSet>
-                    </licenseSets>
-                    <mapping>
-                        <vue>XML_STYLE</vue>
-                    </mapping>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>license headers for sources</id>
-                        <goals><goal>format</goal>
-                        </goals>
-                        <phase>generate-sources</phase>
-                    </execution>
-                    <execution>
-                        <id>license headers for test sources</id>
-                        <goals><goal>format</goal>
-                        </goals>
-                        <phase>generate-test-sources</phase>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
