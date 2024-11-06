@@ -28,10 +28,13 @@ public class ReportValidationException extends RuntimeException {
     STEP_MISMATCH,
     EMPTY_SUITE,
     MANDATORY_SCENARIO_NOT_FOUND,
-    ERR_READ_ZIP
+    ERR_READ_ZIP,
+    NO_VALID_BUNDLE_VERSION,
+    BUNDLE_VERSION_MISMATCH,
+    NO_BUNDLE_VERSION_FILE
   }
 
-    public static final Map<ReportValidationException.MessageId, String> ERROR_MESSAGES =
+  public static final Map<ReportValidationException.MessageId, String> ERROR_MESSAGES =
       Map.of(
           MessageId.SCENARIO_NOT_OK,
           "Das Szenario ''{0}'' ist nicht als erfolgreich hinterlegt",
@@ -46,7 +49,13 @@ public class ReportValidationException extends RuntimeException {
           MessageId.MANDATORY_SCENARIO_NOT_FOUND,
           "Das Szenario ''{0}'' ist als Pflichtszenario markiert, wurde aber nicht gefunden",
           MessageId.ERR_READ_ZIP,
-          "Der gezippte Testbericht konnte nicht gelesen werden");
+          "Der gezippte Testbericht konnte nicht gelesen werden",
+          MessageId.NO_VALID_BUNDLE_VERSION,
+          "Keine lesbare Bundle Version im Testbericht gefunden",
+          MessageId.BUNDLE_VERSION_MISMATCH,
+          "Ungültige Bundle Version ''{0}'' im Testbericht",
+          MessageId.NO_BUNDLE_VERSION_FILE,
+          "Keine pom.xml Datei im Testbericht");
 
   public ReportValidationException(MessageId msgId, Object... args) {
     super(MessageFormat.format(ERROR_MESSAGES.get(msgId), args));

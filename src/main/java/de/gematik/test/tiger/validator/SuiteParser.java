@@ -53,7 +53,7 @@ public class SuiteParser {
   public void parseTestsuite(List<String> featureFilePaths) {
     featureFilePaths.forEach(filePath -> {
       Path file = Paths.get(filePath);
-      log.debug("Parsing file '{}'", file.toUri());
+      log.debug("Parsing file '{}'", filePath);
         try {
         parseFeatureFile(file.toUri().toString(), Files.readString(file));
       } catch (IOException ioe) {

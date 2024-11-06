@@ -7,7 +7,6 @@
 
     <groupId>de.gematik.test</groupId>
     <artifactId>tiger-testsuite-validator</artifactId>
-    <version>1.1.0</version>
 
     <packaging>jar</packaging>
     <name>Tiger-Testsuite-Validator</name>
@@ -34,7 +33,6 @@
         <version.maven>3.9.4</version.maven>
         <version.maven.failsafe>3.2.5</version.maven.failsafe>
         <version.maven.surefire>3.2.5</version.maven.surefire>
-        <mycila.license-maven-plugin.version>4.6</mycila.license-maven-plugin.version>
 
         <spotless.google-java-format.version>1.18.1</spotless.google-java-format.version>
         <spotless-maven-plugin.version>2.43.0</spotless-maven-plugin.version>
@@ -78,54 +76,12 @@
         </repository>
     </repositories>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${version.lombok}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-core</artifactId>
-            <version>7.15.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>7.15.0</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.16.1</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.5.3</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>3.25.3</version>
-        </dependency>
-    </dependencies>
     <build>
         <pluginManagement>
             <plugins>
                 <plugin>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <groupId>org.jacoco</groupId>
-                    <version>${version.jacoco-maven-plugin}</version>
                     <executions>
                         <execution>
                             <id>pre-unit-test</id>
@@ -181,50 +137,13 @@
                 <plugin>
                     <artifactId>sonar-maven-plugin</artifactId>
                     <groupId>org.sonarsource.scanner.maven</groupId>
-                    <version>3.11.0.3922</version>
                 </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
             <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <version>${mycila.license-maven-plugin.version}</version>
-                <configuration>
-                    <licenseSets>
-                        <licenseSet>
-                            <header>doc/license.header.txt</header>
-                            <includes>
-                                <include>**/target/**</include>
-                                <include>**/src/**</include>
-                                <include>**/target/generated-*/**</include>
-                            </includes>
-                            <useDefaultExcludes>true</useDefaultExcludes>
-                        </licenseSet>
-                    </licenseSets>
-                    <mapping>
-                        <vue>XML_STYLE</vue>
-                    </mapping>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>license headers for sources</id>
-                        <goals><goal>format</goal>
-                        </goals>
-                        <phase>generate-sources</phase>
-                    </execution>
-                    <execution>
-                        <id>license headers for test sources</id>
-                        <goals><goal>format</goal>
-                        </goals>
-                        <phase>generate-test-sources</phase>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                     <source>${maven.compiler.source}</source>
@@ -239,7 +158,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${version.maven.surefire}</version>
                 <configuration>
                     <argLine>
                         ${surefireJacocoAgent}
@@ -259,7 +177,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${version.maven.failsafe}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -275,7 +192,6 @@
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
-                <version>${spotless-maven-plugin.version}</version>
                 <configuration>
                     <formats>
                         <format>
@@ -296,7 +212,6 @@
                     <java>
                         <toggleOffOn/>
                         <googleJavaFormat>
-                            <version>${spotless.google-java-format.version}</version>
                             <style>GOOGLE</style>
                             <reflowLongStrings>true</reflowLongStrings>
                         </googleJavaFormat>
@@ -320,7 +235,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.3.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -333,8 +247,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.5.0</version>
-                <configuration>
+               <configuration>
                     <doclint>none</doclint>
                     <sourcepath>src/main/java</sourcepath>
                 </configuration>
@@ -358,7 +271,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.2.4</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -378,7 +290,6 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.7.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
