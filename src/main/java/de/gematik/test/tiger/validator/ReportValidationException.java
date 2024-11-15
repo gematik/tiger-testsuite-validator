@@ -27,6 +27,7 @@ public class ReportValidationException extends RuntimeException {
     STEP_NOT_OK,
     STEP_MISMATCH,
     EMPTY_SUITE,
+    EMPTY_REPORT,
     MANDATORY_SCENARIO_NOT_FOUND,
     ERR_READ_ZIP,
     NO_VALID_BUNDLE_VERSION,
@@ -35,27 +36,31 @@ public class ReportValidationException extends RuntimeException {
   }
 
   public static final Map<ReportValidationException.MessageId, String> ERROR_MESSAGES =
-      Map.of(
-          MessageId.SCENARIO_NOT_OK,
-          "Das Szenario ''{0}'' ist nicht als erfolgreich hinterlegt",
-          MessageId.UNEXPECTED_STEP,
-          "Unerwarteter Testschritt im Szenario ''{0}'', Variante {1}\nErwartet: ''{2}''\nErhalten: ''{3}''",
-          MessageId.STEP_NOT_OK,
-          "Der Testschritt ''{0}'' im Szenario ''{1}'' ist nicht als erfolgreich hinterlegt",
-          MessageId.STEP_MISMATCH,
-          "Im Testbericht für das Szenario ''{0}'' sind die berichteten Schritte nicht identisch mit den erwarteten Schritten\nErwartet: ''{1}''\nErhalten: ''{2}''",
-          MessageId.EMPTY_SUITE,
-          "Eine leere Testsuite ist ungültig!",
-          MessageId.MANDATORY_SCENARIO_NOT_FOUND,
-          "Das Szenario ''{0}'' ist als Pflichtszenario markiert, wurde aber nicht gefunden",
-          MessageId.ERR_READ_ZIP,
-          "Der gezippte Testbericht konnte nicht gelesen werden",
-          MessageId.NO_VALID_BUNDLE_VERSION,
-          "Keine lesbare Bundle Version im Testbericht gefunden",
-          MessageId.BUNDLE_VERSION_MISMATCH,
-          "Ungültige Bundle Version ''{0}'' im Testbericht",
-          MessageId.NO_BUNDLE_VERSION_FILE,
-          "Keine pom.xml Datei im Testbericht");
+      Map.ofEntries(
+          Map.entry(
+              MessageId.SCENARIO_NOT_OK,
+              "Das Szenario ''{0}'' ist nicht als erfolgreich hinterlegt"),
+          Map.entry(
+              MessageId.UNEXPECTED_STEP,
+              "Unerwarteter Testschritt im Szenario ''{0}'', Variante {1}\nErwartet: ''{2}''\nErhalten: ''{3}''"),
+          Map.entry(
+              MessageId.STEP_NOT_OK,
+              "Der Testschritt ''{0}'' im Szenario ''{1}'' ist nicht als erfolgreich hinterlegt"),
+          Map.entry(
+              MessageId.STEP_MISMATCH,
+              "Im Testbericht für das Szenario ''{0}'' sind die berichteten Schritte nicht identisch mit den erwarteten Schritten\nErwartet: ''{1}''\nErhalten: ''{2}''"),
+          Map.entry(MessageId.EMPTY_SUITE, "Eine leere Testsuite ist ungültig!"),
+          Map.entry(MessageId.EMPTY_REPORT, "Ein leerer Testbericht ist ungültig!"),
+          Map.entry(
+              MessageId.MANDATORY_SCENARIO_NOT_FOUND,
+              "Das Szenario ''{0}'' ist als Pflichtszenario markiert, wurde aber nicht gefunden"),
+          Map.entry(MessageId.ERR_READ_ZIP, "Der gezippte Testbericht konnte nicht gelesen werden"),
+          Map.entry(
+              MessageId.NO_VALID_BUNDLE_VERSION,
+              "Keine lesbare Bundle Version im Testbericht gefunden"),
+          Map.entry(
+              MessageId.BUNDLE_VERSION_MISMATCH, "Ungültige Bundle Version ''{0}'' im Testbericht"),
+          Map.entry(MessageId.NO_BUNDLE_VERSION_FILE, "Keine pom.xml Datei im Testbericht"));
 
   public ReportValidationException(MessageId msgId, Object... args) {
     super(MessageFormat.format(ERROR_MESSAGES.get(msgId), args));

@@ -1,3 +1,7 @@
+# Release 1.1.1
+
+TGRTVAL-1: do not allow empty report zip archives as a valid report
+
 # Release 1.1.0
 
 TITUS-1320: zip archive now should also contain the pom.xml file.

@@ -41,6 +41,8 @@ public class ReportValidator {
   private final SuiteParser suiteParser;
   private final TestReport testReport;
 
+  private boolean anyScenarioChecked;
+
   public static void parseTitusReport(ZipInputStream reportStream, Map<String, String> featureFiles) {
     SuiteParser suiteParser = new SuiteParser();
     suiteParser.parseTestsuiteFromTitus(featureFiles);
@@ -62,6 +64,7 @@ public class ReportValidator {
   public ReportValidator(SuiteParser suiteParser, TestReport report) {
     this.suiteParser = suiteParser;
     this.testReport = report;
+    anyScenarioChecked = false;
   }
 
   public TestResult validateReport() {
@@ -92,6 +95,10 @@ public class ReportValidator {
                           validateScenario(
                               filename, scenario, validationResult, backgroundOptional));
             });
+
+    if (!anyScenarioChecked) {
+      throw new ReportValidationException(ReportValidationException.MessageId.EMPTY_REPORT);
+    }
     return validationResult.get();
   }
 
@@ -114,6 +121,7 @@ public class ReportValidator {
     } else {
       try {
         scenarioResult.validateSteps(scenario, backgroundOptional);
+        anyScenarioChecked = true;
       } catch (ReportValidationException rve) {
         validationResult.set(TestResult.FAILURE);
         throw rve;

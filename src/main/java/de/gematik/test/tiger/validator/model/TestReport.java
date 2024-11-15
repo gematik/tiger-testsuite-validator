@@ -82,6 +82,9 @@ public class TestReport {
         throw new ReportValidationException(
             ReportValidationException.MessageId.NO_BUNDLE_VERSION_FILE);
       }
+      if (scenarioResults.isEmpty()) {
+        throw new ReportValidationException(ReportValidationException.MessageId.EMPTY_REPORT);
+      }
     } catch (IOException ioe) {
       throw new ReportValidationException(ReportValidationException.MessageId.ERR_READ_ZIP, ioe);
     }
