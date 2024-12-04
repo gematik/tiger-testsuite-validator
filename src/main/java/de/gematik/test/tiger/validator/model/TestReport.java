@@ -68,6 +68,12 @@ public class TestReport {
       while ((entry =
               reportStream.getNextEntry()) // NOSONAR - security checks are done on titus side
           != null) {
+        if (entry.getName().contains("__MACOSX")) {
+          log.warn(
+              "Detected Mac OSX resource fork, this ZIP hqs been manually packed! {}",
+              entry.getName());
+          continue;
+        }
         if (bundleVersion.isPresent() && entry.getName().equals("pom.xml")) {
           checkVersionMatches(new String(reportStream.readAllBytes()), bundleVersion.get());
           versionChecked = true;

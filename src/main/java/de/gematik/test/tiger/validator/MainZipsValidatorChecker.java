@@ -23,7 +23,7 @@ import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-class ManualZipsValidatorChecker {
+public class MainZipsValidatorChecker {
 
   static Map<String, String> featureFilesMap = new HashMap<>();
 
@@ -34,7 +34,7 @@ class ManualZipsValidatorChecker {
    */
   public static void main(String... args) throws IOException {
     if (args.length != 2) {
-      throw new IllegalArgumentException("You need to supply two paths, to bundle zip and to report zip");
+      throw new IllegalArgumentException("You need to supply two paths, to bundle zip (0) and to report zip (1)");
     }
     ZipInputStream bundleInputStream = new ZipInputStream(Files.newInputStream(Paths.get(args[0])));
 
