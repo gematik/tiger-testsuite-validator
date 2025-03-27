@@ -29,6 +29,7 @@ public class ReportValidationException extends RuntimeException {
     EMPTY_SUITE,
     EMPTY_REPORT,
     MANDATORY_SCENARIO_NOT_FOUND,
+    OPTGROUP_SCENARIO_NOT_FOUND,
     ERR_READ_ZIP,
     NO_VALID_BUNDLE_VERSION,
     BUNDLE_VERSION_MISMATCH,
@@ -54,6 +55,9 @@ public class ReportValidationException extends RuntimeException {
           Map.entry(
               MessageId.MANDATORY_SCENARIO_NOT_FOUND,
               "Das Szenario ''{0}'' ist als Pflichtszenario markiert, wurde aber nicht gefunden"),
+          Map.entry(
+              MessageId.OPTGROUP_SCENARIO_NOT_FOUND,
+              "Das Szenario ''{0}'' ist als optionales Gruppenszenario ''{1}'' markiert, wurde aber nicht gefunden"),
           Map.entry(MessageId.ERR_READ_ZIP, "Der gezippte Testbericht konnte nicht gelesen werden"),
           Map.entry(
               MessageId.NO_VALID_BUNDLE_VERSION,
