@@ -52,16 +52,16 @@ public class TestReport {
   }
 
   /**
-   * parses json result files from zip archive and if bundleVersion is not null also checks that the
+   * parses JSON result files from zip archive,
+   * and if bundleVersion is not null also checks that the
    * project version in the pom.xml file matches the given bundleVersion param.
    *
    * @param reportStream inout stream to zip archive to be validated
-   * @param bundleVersion expected version to be found in pom.xml, null if no version check shall be
-   *     performed
+   * @param bundleVersion expected a version to be found in pom.xml, empty if no version check shall
+   *     be performed
    */
   @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-  public void parseReportFromTitus(
-      ZipInputStream reportStream, Optional<String> bundleVersion) {
+  public void parseReportFromTitus(ZipInputStream reportStream, Optional<String> bundleVersion) {
     try {
       boolean versionChecked = false;
       ZipEntry entry;
@@ -79,7 +79,9 @@ public class TestReport {
           versionChecked = true;
         }
         if (entry.getName().endsWith(".json")
-            && !(entry.getName().startsWith("bootstrap") || entry.getName().startsWith("nivo"))) {
+            && !(entry.getName().startsWith("bootstrap")
+                || entry.getName().startsWith("nivo")
+                || entry.getName().contains("serenity-summary"))) {
           log.info("Parsing zip report file '{}'", entry.getName());
           parseScenarioJsonResult(new String(reportStream.readAllBytes()), entry.getName());
         }
@@ -134,7 +136,7 @@ public class TestReport {
     int end = pomXml.indexOf("</version>");
     if (start == -1 || end == -1 || end <= start) {
       throw new ReportValidationException(
-              ReportValidationException.MessageId.NO_VALID_BUNDLE_VERSION);
+          ReportValidationException.MessageId.NO_VALID_BUNDLE_VERSION);
     }
     return pomXml.substring(start + "<version>".length(), end);
   }

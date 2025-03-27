@@ -105,6 +105,18 @@ class TitusReportValidatorTest extends MethodStartLoggerTestClass {
     }
   }
 
+  void addEntryToZipReport(String filePath, String entryPath) throws IOException {
+    Map<String, String> zip_properties = Map.of("create", "true");
+    try (FileSystem zipfs = FileSystems.newFileSystem(zipPath, zip_properties)) {
+      Path pathInZipfile = zipfs.getPath(entryPath);
+      try {
+        Files.copy(Paths.get(filePath), pathInZipfile);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
+  }
+
   private static ZipInputStream getReportZipStream() throws IOException {
     return new ZipInputStream(Files.newInputStream(zipPath));
   }
@@ -149,6 +161,18 @@ class TitusReportValidatorTest extends MethodStartLoggerTestClass {
     ZipInputStream reportStream = getReportZipStream();
     assertThatNoException()
         .isThrownBy(() -> ReportValidator.parseTitusReport(reportStream, featureFilesMap));
+    log().info("Report validated successfully");
+  }
+
+  @Test
+  void readAndValidateWithSerenitySummaryJSON_OK() throws IOException {
+    removeEntriesFromZipReport(
+      "74537195ff5a286cd8461687706738bf4001c48f00e90c7ab935c06747a63fba.json",
+      "0ff6c45977f119a676e68067b247cea0c821cd7acd6d9b4607d5c6551323b423.json");
+    addEntryToZipReport("testdata/tiger-test-lib/additional_files/serenity-summary.json", "serenity-summary.json");
+    ZipInputStream reportStream = getReportZipStream();
+    assertThatNoException()
+      .isThrownBy(() -> ReportValidator.parseTitusReport(reportStream, featureFilesMap));
     log().info("Report validated successfully");
   }
 

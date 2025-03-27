@@ -23,12 +23,9 @@ import io.cucumber.messages.types.Background;
 import io.cucumber.messages.types.FeatureChild;
 import io.cucumber.messages.types.Scenario;
 import io.cucumber.messages.types.Tag;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.zip.ZipInputStream;
-
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -38,12 +35,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ReportValidator {
 
+  public static final String OPT_GROUP_TOKEN = "@OptGroup:";
   private final SuiteParser suiteParser;
   private final TestReport testReport;
 
   private boolean anyScenarioChecked;
 
-  public static void parseTitusReport(ZipInputStream reportStream, Map<String, String> featureFiles) {
+  public static void parseTitusReport(
+      ZipInputStream reportStream, Map<String, String> featureFiles) {
     SuiteParser suiteParser = new SuiteParser();
     suiteParser.parseTestsuiteFromTitus(featureFiles);
     TestReport testReport = new TestReport();
@@ -52,7 +51,8 @@ public class ReportValidator {
     reportValidator.validateReport();
   }
 
-  public static void parseTitusReport(ZipInputStream reportStream, Map<String, String> featureFiles, String version) {
+  public static void parseTitusReport(
+      ZipInputStream reportStream, Map<String, String> featureFiles, String version) {
     SuiteParser suiteParser = new SuiteParser();
     suiteParser.parseTestsuiteFromTitus(featureFiles);
     TestReport testReport = new TestReport();
@@ -72,6 +72,8 @@ public class ReportValidator {
     if (suiteParser.getFileFeatureMap().isEmpty()) {
       throw new ReportValidationException(ReportValidationException.MessageId.EMPTY_SUITE);
     }
+
+    List<String> optGroupsInReport = new ArrayList<>();
     suiteParser
         .getFileFeatureMap()
         .forEach(
@@ -91,25 +93,72 @@ public class ReportValidator {
                   .map(Optional::get)
                   .filter(scenario -> mandatoryFeature || isRelevant(scenario.getTags()))
                   .forEach(
-                      scenario ->
-                          validateScenario(
-                              filename, scenario, validationResult, backgroundOptional));
+                      scenario -> {
+                        Optional<ScenarioResult> result =
+                            validateScenario(
+                                filename, scenario, validationResult, backgroundOptional);
+                        // first remember all optgroups that have a result in the report
+                        if (result.isPresent() && isOptGroup(scenario)) {
+                          scenario.getTags().stream()
+                              .map(Tag::getName)
+                              .filter(name -> name.startsWith(OPT_GROUP_TOKEN))
+                              .map(name -> name.substring(OPT_GROUP_TOKEN.length()))
+                              .filter(groupName -> !optGroupsInReport.contains(groupName))
+                              .forEach(optGroupsInReport::add);
+                        }
+                      });
             });
 
     if (!anyScenarioChecked) {
       throw new ReportValidationException(ReportValidationException.MessageId.EMPTY_REPORT);
     }
+
+    if (!optGroupsInReport.isEmpty() && validationResult.get() == TestResult.SUCCESS) {
+      log.info("Optional groups have been executed! {}", optGroupsInReport);
+      suiteParser
+          .getFileFeatureMap()
+          .forEach(
+              (filename, feature) -> {
+                log.info("Validating Feature {} for optional groups...", filename);
+                Optional<Background> backgroundOptional =
+                    feature.getChildren().stream()
+                        .filter(child -> child.getBackground().isPresent())
+                        .map(child -> child.getBackground().get())
+                        .findFirst();
+
+                feature.getChildren().stream()
+                    .map(FeatureChild::getScenario)
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .filter(scenario -> isInOptGroup(scenario, optGroupsInReport))
+                    .forEach(
+                            // check all scenarios of all executed opt groups have a SUCCESS result
+                        scenario ->
+                            validateScenario(
+                                    filename, scenario, validationResult, backgroundOptional)
+                                .orElseThrow(
+                                    () ->
+                                        new ReportValidationException(
+                                            ReportValidationException.MessageId
+                                                .OPTGROUP_SCENARIO_NOT_FOUND,
+                                            scenario.getName(),
+                                            scenario.getTags().stream()
+                                                .map(Tag::getName)
+                                                .filter(name -> name.startsWith(OPT_GROUP_TOKEN))
+                                                .toList())));
+              });
+    }
     return validationResult.get();
   }
 
   @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-  private void validateScenario(
+  private Optional<ScenarioResult> validateScenario(
       String filename,
       Scenario scenario,
       AtomicReference<TestResult> validationResult,
       Optional<Background> backgroundOptional) {
     if (validationResult.get() != TestResult.SUCCESS) {
-      return;
+      return Optional.empty();
     }
     ScenarioResult scenarioResult =
         testReport.getScenarioResults().get(filename + scenario.getName());
@@ -118,10 +167,12 @@ public class ReportValidator {
         throw new ReportValidationException(
             ReportValidationException.MessageId.MANDATORY_SCENARIO_NOT_FOUND, scenario.getName());
       }
+      return Optional.empty();
     } else {
       try {
         scenarioResult.validateSteps(scenario, backgroundOptional);
         anyScenarioChecked = true;
+        return Optional.of(scenarioResult);
       } catch (ReportValidationException rve) {
         validationResult.set(TestResult.FAILURE);
         throw rve;
@@ -132,7 +183,25 @@ public class ReportValidator {
   public boolean isRelevant(List<Tag> tags) {
     return tags.stream()
         .map(Tag::getName)
-        .anyMatch(name -> name.equals("@Optional") || name.equals("@Mandatory"));
+        .anyMatch(
+            name ->
+                name.equals("@Optional")
+                    || name.equals("@Mandatory")
+                    || name.startsWith(OPT_GROUP_TOKEN));
+  }
+
+  public boolean isOptGroup(Scenario scenario) {
+    return scenario.getTags().stream()
+        .map(Tag::getName)
+        .anyMatch(name -> name.startsWith(OPT_GROUP_TOKEN));
+  }
+
+  public boolean isInOptGroup(Scenario scenario, List<String> optGroups) {
+    return scenario.getTags().stream()
+        .map(Tag::getName)
+        .filter(name -> name.startsWith(OPT_GROUP_TOKEN))
+        .map(name -> name.substring(OPT_GROUP_TOKEN.length()))
+        .anyMatch(optGroups::contains);
   }
 
   public boolean isMandatory(List<Tag> tags) {

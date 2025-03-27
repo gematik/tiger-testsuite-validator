@@ -1,5 +1,10 @@
+# Release 1.1.2
+
+TGRTVAL-3: Introducing support for @OptGroup:XXXXX tags in test suites. If any scenario with an opt group tag is foun din the report, all scenarios from the feature bundle with matching opt group tags must be found in the report too.
+
 # Release 1.1.1
 
+TGRTVAL-2: detecting and rejecting manually Mac OS packed zip archives, which contains special __MACOSX folders that mess up the validator.
 TGRTVAL-1: do not allow empty report zip archives as a valid report
 
 # Release 1.1.0
