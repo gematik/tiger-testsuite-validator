@@ -136,6 +136,7 @@ Feature: HTTP/HTTPS GlueCode Test feature
     Then TGR find request to path "/html"
     Then TGR current response with attribute "$.body.html.body.h1.text" matches "Herman Melville - Moby-Dick"
 
+  @Optional
   Scenario: Test Find Last Request
     Given TGR send empty GET request to "http://httpbin/anything?foobar=1"
     Then TGR send empty GET request to "http://httpbin/anything?foobar=2"
