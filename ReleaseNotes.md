@@ -1,3 +1,7 @@
+# Release 1.1.4
+
+TGRTVAL-4: Features annotated with @Mandatory did not cause validator to fail if scenarios where missing in report
+
 # Release 1.1.2
 
 TGRTVAL-3: Introducing support for @OptGroup:XXXXX tags in test suites. If any scenario with an opt group tag is foun din the report, all scenarios from the feature bundle with matching opt group tags must be found in the report too.

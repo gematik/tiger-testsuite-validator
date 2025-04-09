@@ -96,7 +96,7 @@ public class ReportValidator {
                       scenario -> {
                         Optional<ScenarioResult> result =
                             validateScenario(
-                                filename, scenario, validationResult, backgroundOptional);
+                                filename, scenario, validationResult, backgroundOptional, mandatoryFeature);
                         // first remember all optgroups that have a result in the report
                         if (result.isPresent() && isOptGroup(scenario)) {
                           scenario.getTags().stream()
@@ -135,7 +135,7 @@ public class ReportValidator {
                             // check all scenarios of all executed opt groups have a SUCCESS result
                         scenario ->
                             validateScenario(
-                                    filename, scenario, validationResult, backgroundOptional)
+                                    filename, scenario, validationResult, backgroundOptional, false)
                                 .orElseThrow(
                                     () ->
                                         new ReportValidationException(
@@ -156,14 +156,14 @@ public class ReportValidator {
       String filename,
       Scenario scenario,
       AtomicReference<TestResult> validationResult,
-      Optional<Background> backgroundOptional) {
+      Optional<Background> backgroundOptional, boolean featureMandatory) {
     if (validationResult.get() != TestResult.SUCCESS) {
       return Optional.empty();
     }
     ScenarioResult scenarioResult =
         testReport.getScenarioResults().get(filename + scenario.getName());
     if (scenarioResult == null) {
-      if (isMandatory(scenario.getTags())) {
+      if ((featureMandatory || isMandatory(scenario.getTags())) && !isOptional(scenario.getTags()) && !isOptGroup(scenario)) {
         throw new ReportValidationException(
             ReportValidationException.MessageId.MANDATORY_SCENARIO_NOT_FOUND, scenario.getName());
       }
@@ -206,5 +206,8 @@ public class ReportValidator {
 
   public boolean isMandatory(List<Tag> tags) {
     return tags.stream().map(Tag::getName).anyMatch(name -> name.equals("@Mandatory"));
+  }
+  public boolean isOptional(List<Tag> tags) {
+    return tags.stream().map(Tag::getName).anyMatch(name -> name.equals("@Optional"));
   }
 }
