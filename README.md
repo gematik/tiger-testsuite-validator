@@ -25,7 +25,9 @@
 </details>
 
 ## About The Project
-About The Project: The tiger testsuite validator is a library that allows to validate a given set of feature files agaionst a zipped serneity report. It checks whether all mandatory scenarios and test steps are performed successfully and also if any optional scenario failed.
+About The Project: 
+The tiger testsuite validator is a library that allows validating a given set of feature files against a zipped serenity report. 
+It checks whether all mandatory scenarios and test steps are performed successfully and also if any optional scenario failed.
 
 ### Release Notes
 See [ReleaseNotes.md](./ReleaseNotes.md) for all information regarding the (newest) releases.
@@ -51,12 +53,19 @@ Datatables are not checked for unmodified values in reports.
 
 Annotations in Example sections are ignored for the validity check.
 
-@OptGroup:XXXXXXX allows to group optional scenarios, meaning if any of the opt group scenarios is found in the report, all must be executed and green.
-You may spread the opt group tags to multiple files but be aware that filtering of execution does NOT apply to the validator, so if you perform only a subset of scenarios (due to additional tag filtering) the validator rightfully will reject the report as missing some scenarios.
-The workaround is to "group" such scenarios in separate files and provide multiple feature bundle files on Titus.
+@OptGroup:XXXXXXX allows grouping optional scenarios,
+meaning if any of the opt group scenarios are found in the report, all must be executed and green.
+You may spread the opt group tags to multiple files
+but be aware that filtering of execution does NOT apply to the validator,
+so if you perform only a subset of scenarios (due to additional tag filtering),
+the validator rightfully will reject the report as missing some scenarios.
+The workaround is to "group"
+such scenarios in separate files and provide multiple feature bundle files on Titus.
 
-As of now executing a scenario that has two opt groups automatically enforces both groups to be checked,
-it would be also possible to change this so that only if a scenario with explicitly ONE opt group tag is executed,
+As of now,
+executing a scenario that has two opt groups automatically enforces both groups to be checked;
+it would be also possible to change this
+so that only if a scenario with an explicit ONE opt group tag is executed, 
 then the opt group will be checked.
 Not sure as of now which way is the one we will need in the future. 
 

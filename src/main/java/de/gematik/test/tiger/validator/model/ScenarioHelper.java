@@ -42,6 +42,9 @@ public class ScenarioHelper {
               });
       expectedStep = expectedStep + dataTableStr;
     }
-    return expectedStep;
+    if (step.getDocString().isPresent()) {
+      expectedStep = expectedStep + "\n" + step.getDocString().get().getContent();
+    }
+    return expectedStep.replace("\r\n", "\n");
   }
 }

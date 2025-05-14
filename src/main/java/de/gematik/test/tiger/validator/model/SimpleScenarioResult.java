@@ -61,7 +61,8 @@ public class SimpleScenarioResult extends ScenarioResult {
 
     expectedSteps.forEach(
         step -> {
-          String reportedStep = steps.get(stepIndex.get()).asObject().getString("description", "");
+          String reportedStep = steps.get(stepIndex.get()).asObject().getString("description", "").replace("\r\n", "\n");
+
 
           if (!checkTestResult(steps.get(stepIndex.get()).asObject())) {
             throw new ReportValidationException(
